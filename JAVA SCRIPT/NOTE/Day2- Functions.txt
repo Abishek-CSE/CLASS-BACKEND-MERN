@@ -1,0 +1,53 @@
+Function:
+A function that reueable Block of code {} design or devlope to perform a specific task. it runs only when it is called.
+
+(invoked)
+
+1. Function declaration
+2. Function call
+3. Parameters
+4. Arguments
+5  Return Value
+
+
+3 Types:
+1. Function declaration
+  
+function add(){
+
+}
+
+
+
+2. Function Expression (anonymoes function)
+
+let add = function(){
+
+}
+
+3. Arrow Function
+
+let add = ()=>{
+
+}
+
+
+
+
+
+
+Parameters :
+Variables listed in function Definition.
+
+const a = (a,b,c)=>{
+
+}
+
+
+Arguments:
+
+values passed while coding - values passed in the function call.
+
+
+
+ 

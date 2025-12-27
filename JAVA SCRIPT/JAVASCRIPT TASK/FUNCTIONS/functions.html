@@ -1,0 +1,228 @@
+<script>
+    //Function => Function is a block of code that performs a task
+    //3types of function => Function Declaration, Function Expression, Arrow Function
+    //Parameters => listed in the function declaration and gives as the variable 
+    //Argumnets => Values is passed while function calls.
+
+    //1.function declaration
+    function add(a,b){
+        return a + b
+    }
+    console.log(add(12,13));
+    // Arrow Function
+    const arr =(d,c)=>{
+        console.log(d+c);
+    }
+    arr(34,46)
+    //Function Expression
+    const md =function(e,f){
+        return e +f
+    }
+    console.log(md(90,10))
+    //2. Convert this function into Arrow Function
+    const greet =(name)=>{
+        return `Hello ${name}`
+    }
+    console.log(greet("AK"));
+    //3. Calculate bill in the normal function 
+    function CalculateBill(amount,percentage){
+        return amount + percentage
+    }
+    console.log(CalculateBill(1200,11));
+    //3. Arrow Function Calculate Bill
+    const Arrow =(amount,percentage)=>{
+        return amount + percentage
+    }
+    console.log(Arrow(1300,233));
+    //4. Adding Arrow Function in another function
+    const user = {
+       name: "Ajay",
+       sayName: function () {
+       console.log(this.name);
+    },
+    sayNameArrow :() =>{
+        console.log(this.name);
+    }}
+    //5.Square  without using return and {}
+    const square =(n)=> n*n
+    console.log(square(4));
+    //6.SumAll using rest Operator
+    const sumAll =(...n)=>{
+        return  n.reduce((a,b)=> a +b)
+    }
+    console.log(sumAll(1,2,3,4,5));
+    //7.  returns only marks greater than or equal to 50, using filter and an arrow callback.
+    // filter removes unwanted items and keeps only what we need.
+    const marks =[98,45,67,30,88,76]
+    const names =()=>{
+       return marks.filter(marks=> marks >= 50)
+    }
+    console.log(names());
+    //8.Arrow Function into Normal Function and Funtion Expression
+    //Normal Function:
+    function formatname(firstname,lastname){
+         return firstname.toUpperCase() +' and '+lastname.toUpperCase()
+    }
+    console.log(formatname('ak','str'));
+    //9. it give Reference Error because const is not hoisted but not initliazed
+    // it shows Temporal Dead Zonw (TDZ)
+    //10.Another Function a full greeting message  in arrrow function:
+    const gree = (greeting) => {
+    return (name) => {
+        return `${greeting}, ${name}!`;
+    }}
+    const sayHello = gree("Hello");
+    console.log(sayHello("Abishek")); 
+    //11.Reverse a String => Using Inbuilt Function
+    const string ="ABISHEK"
+     const as =string.split('').reverse().join('')
+    console.log(as);
+    //Reverse a String using for loop
+    function reservestring(string1){
+    let reserved =""
+    for(let i= string1.length-1;i>=0;i--){
+        reserved +=string1[i]
+    }return reserved
+}
+    let string11="I Dont Know AnyThing"
+    console.log(reservestring(string11));
+    //12.Group by Age small to big
+    const people =[{Name:"AK",age:49},{Name:"Vijay",age:50},{Name:"SK",age:36}]
+    function grouby(people){
+        const result ={}
+        for(let j=0;j<people.length;j++){
+            const age =people[j].age
+            const name =people[j].Name
+            if(!result[age]){
+                result[age] =[]
+            }
+            result[age].push(name)
+        }
+        return result
+    }
+    console.log(grouby(people));
+    //13.Anagram Solution
+    function Anagram(str1,str2){
+        const cleanStr1 = str1.toLowerCase().replace(/\s/g, '');
+        const cleanstr2 = str2.toLowerCase().replace(/\s/g,'')
+        if(cleanStr1.length != cleanstr2.length){
+            return false
+        }
+        const resultstr1 =cleanStr1.split('').sort().join('')
+        const resultstr2 =cleanstr2.split('').sort().join('')
+
+        return resultstr1 == resultstr2
+    }
+    console.log(Anagram("Silent",'Listen'))
+    //14. Remove Duplicates using Inbulit function
+    function builtin(num){
+        return[...new Set(num)]
+    }
+    const number =[1,1,2,3,4,5,5]
+    console.log(builtin(number));
+    // Looping Condition for Remove Duplicates elemnet in array
+    function looping(arra){
+        const result =[]
+        for(let k=0;k<arra.length;k++){
+            if(!result.includes(arra[k])){
+                result.push(arra[k])
+            }
+        }
+        return result
+    }
+    const number1 =[1,1,2,3,4,45,5,5]
+    console.log(looping(number1));
+    //15. Second Laargest Elemnt in the array
+    function secondelement(array){
+        let Largest = -Infinity
+        let second =-Infinity
+        for(let r=0;r<array.length;r++){
+            const num1=array[r]
+            if(num1 >Largest){
+                second =Largest
+                Largest =num1
+            }else if(num1 < Largest && num1 >second ){
+                second =num1
+            }
+
+        }
+        return second == -Infinity? null :second
+    }
+    const array1 =[123,456,789,798]
+    console.log(secondelement(array1));
+    //16.Prime Number for particular number true or false
+    function Isprime(num2){
+        if(num2 <= 1){
+            return false
+        }
+        for(let g =2;g<num2;g++){
+            if(num2 % g == 0){
+                return false
+            }
+        }
+        return true
+    }
+    console.log(Isprime(2));
+    // Prime number Upto N
+    function PrimeNumber(n){
+        for(let num3 =2;num3 <= n ;num3++){
+            let primenumber1 =true;
+            for(let h =2; h< num3;h++){
+                if(num3 % h ==0){
+                    primenumber1 =false
+                    break
+                }
+            }
+            if(primenumber1){
+                console.log(num3);
+                
+            }
+        }
+    }
+    PrimeNumber(12)
+    //17.Factorial Number
+    function FactorialNumber(n){
+        let result3 =1;
+        for(let y =1;y<= n;y++){
+            result3 =result3 *y
+        }
+        return result3
+    }
+    console.log(FactorialNumber(5));
+    //18.Frequency of Character 
+    function frequency(gt){
+        const freq ={}
+        for(let o =0 ;o <gt.length;o++){
+            const char =gt[o]
+            if(freq[char]){
+                freq[char] += 1
+            }else{
+                freq[char] = 1
+            }
+        }
+        return freq
+    }
+    console.log(frequency("Abishek"));
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+</script>

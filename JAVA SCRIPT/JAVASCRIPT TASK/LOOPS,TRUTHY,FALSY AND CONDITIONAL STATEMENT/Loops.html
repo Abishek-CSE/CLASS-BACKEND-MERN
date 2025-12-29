@@ -1,0 +1,122 @@
+<script>
+  //Even Number Stores in the Array
+  function EvenNumber(arr) {
+    let result = [];
+    for (let i = 1; i <= arr.length; i++) {
+      if (arr[i] % 2 == 0) {
+        result.push(arr[i]);
+      }
+    }
+    return result;
+  }
+  console.log(EvenNumber([1, 2, 3, 4, 5, 6, 7, 8, 9]));
+  //Return Day of the week using Switch Case
+  function WeekDays() {
+    var day = 4;
+    switch (day) {
+      case 1:
+        console.log("Monday");
+        break;
+      case 2:
+        console.log("Tuesday");
+        break;
+      case 3:
+        console.log("Wednesday");
+        break;
+      case 4:
+        console.log("Thursday");
+        break;
+      case 5:
+        console.log("Friday");
+        break;
+      case 6:
+        console.log("Saturday");
+        break;
+      case 7:
+        console.log("Sunday");
+        break;
+      default:
+        console.log("Invalid Input");
+    }
+  }
+  WeekDays();
+  //count the number of student in the perticular grade:
+  const studentDetails = [
+    { Name: "AK", Grade: "A" },
+    { Name: "Bala", Grade: "B" },
+    { Name: "Vijay", Grade: "A" },
+    { Name: "PM", Grade: "C" },
+  ];
+  function Grade(array) {
+    let result = {};
+    for (let j = 0; j < array.length; j++) {
+      const grade = array[j].Grade;
+      if (result[grade]) {
+        result[grade] = result[grade] + 1;
+      } else {
+        result[grade] = 1;
+      }
+    }
+    return result;
+  }
+  console.log(Grade(studentDetails));
+  //Truthy and Falsy value Returns
+  function TruthyandFalsy(value) {
+    return value ? "Truthy" : "Falsy";
+  }
+  console.log(TruthyandFalsy([]));
+  console.log(TruthyandFalsy({}));
+  console.log(TruthyandFalsy("Aby"));
+  console.log(TruthyandFalsy(true));
+  console.log(TruthyandFalsy(0));
+  console.log(TruthyandFalsy(null));
+  console.log(TruthyandFalsy(undefined));
+  console.log(TruthyandFalsy(false));
+  //Mixed values in array and returns the only truthy value
+  //Filter => function returns true are included in a new array
+  const valuesand = [null, undefined, {}, [], "", "Aby", 0, 786];
+  function truthyvalue(v) {
+    return v.filter(Boolean);
+  }
+  console.log(truthyvalue(valuesand));
+  // Write a function that accepts three parameters (firstName, lastName, nickname).
+  // Return the full name as "firstName lastName", but if lastName is falsy, return just firstName.
+  // If both are falsy but nickname exists, return nickname. If all are falsy, return "Anonymous".
+  function demo(first, second, nickname) {
+    if (first && second) {
+      return `${first} ${second}`;
+    }
+    if (first) {
+      return first;
+    }
+    if (second) {
+      return second;
+    }
+    if (nickname) {
+      return nickname;
+    }
+    return "Anonymous";
+  }
+  console.log(demo("Ajith", "Kumar", "AK"));
+  console.log(demo("", "", "STR"));
+  console.log(demo("Dhanush", "", "D"));
+  console.log(demo("", "", ""));
+  //Create a function that attempts to reassign values to variables declared with var, let, and const. 
+  // Also attempt to modify properties of a const object. 
+  // Explain what works and what throws errors.
+  function variables(){
+    var a =10
+    a =20
+    console.log("Var",a);
+    let b=20
+    b=200
+    console.log("Let",b);
+    const c =30
+    console.log("Const",c);
+    const d ={Name:"AK",age:23}
+    d.age =24
+    d.city ="Chennai"
+    console.log("Const ",d); 
+  }
+  variables()
+</script>

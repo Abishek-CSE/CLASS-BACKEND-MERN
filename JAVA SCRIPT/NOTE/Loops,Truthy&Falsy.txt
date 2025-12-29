@@ -1,0 +1,504 @@
+JavaScript Day 3 - Interview Prep Notes
+Topics Covered
+Loops / if / switch
+Truthy & Falsy
+Scope (var, let, const)
+Closure
+
+1. Loops / if / switch
+Loops
+What are loops? Loops allow you to execute a block of code multiple times without writing the same code repeatedly.
+
+Types of Loops:
+
+for loop
+Used when you know how many times you want to repeat something.
+
+
+
+
+javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+Structure: initialization, condition, increment/decrement
+
+while loop
+Used when you want to repeat until a condition becomes false.
+
+
+
+
+javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+do...while loop
+Executes at least once, then checks the condition.
+
+
+
+
+javascript
+let num = 0;
+do {
+  console.log(num);
+  num++;
+} while (num < 5);
+for...of loop
+Used to iterate over arrays or iterable objects.
+
+
+
+
+javascript
+const colors = ['red', 'green', 'blue'];
+for (const color of colors) {
+  console.log(color);
+}
+for...in loop
+Used to iterate over object keys.
+
+
+
+
+javascript
+const person = { name: 'John', age: 30 };
+for (const key in person) {
+  console.log(key, person[key]);
+}
+Interview Tip: Be ready to explain when to use each loop type. Know the difference between for...in and for...of.
+
+Conditional Statements
+if statement
+Executes code when condition is true.
+
+
+
+
+javascript
+if (age >= 18) {
+  console.log('Adult');
+}
+if...else statement
+Provides alternative path when condition is false.
+
+
+
+
+javascript
+if (score >= 50) {
+  console.log('Pass');
+} else {
+  console.log('Fail');
+}
+if...else if...else
+Multiple conditions to check.
+
+
+
+
+javascript
+if (marks >= 90) {
+  console.log('A Grade');
+} else if (marks >= 75) {
+  console.log('B Grade');
+} else {
+  console.log('C Grade');
+}
+Ternary Operator
+Shorthand for simple if-else.
+
+
+
+
+javascript
+const result = age >= 18 ? 'Adult' : 'Minor';
+switch statement
+Used when you have multiple specific values to check against one variable.
+
+
+
+
+javascript
+const day = 'Monday';
+switch (day) {
+  case 'Monday':
+    console.log('Start of week');
+    break;
+  case 'Friday':
+    console.log('End of week');
+    break;
+  default:
+    console.log('Midweek');
+}
+Important: Always use break to prevent fall-through unless intentional.
+
+When to use switch over if-else:
+
+When checking one variable against multiple exact values
+Makes code cleaner when you have 3+ conditions on the same variable
+Why Important for React & Node.js:
+
+Loops help you render lists in React (map over arrays)
+Conditionals control component rendering and API response handling
+Switch statements help in routing and action type handling in Redux
+Learning Process for Loops & Conditionals
+Step 1: Understand the basic syntax of each loop and conditional Step 2: Practice writing simple loops (print numbers 1-10, iterate arrays) Step 3: Learn when to choose which loop type Step 4: Practice nested loops and complex conditions Step 5: Combine loops with conditionals in real scenarios
+
+Common Mistakes:
+
+Forgetting to increment counter in while loops (infinite loop)
+Missing break in switch statements
+Using for...in on arrays instead of for...of
+Confusing assignment (=) with comparison (==, ===) in conditions
+
+2. Truthy & Falsy
+What are Truthy and Falsy Values?
+In JavaScript, every value has an inherent boolean nature when used in a boolean context like if statements. Values that convert to true are truthy, values that convert to false are falsy.
+
+Falsy Values (Only 6 in JavaScript)
+
+
+
+javascript
+false         // boolean false
+0             // number zero
+''            // empty string
+null          // null
+undefined     // undefined
+NaN           // Not a Number
+Everything else is truthy.
+
+Truthy Values (Examples)
+
+
+
+javascript
+true          // boolean true
+42            // any non-zero number
+'hello'       // any non-empty string
+[]            // empty array (yes, it's truthy!)
+{}            // empty object
+function(){}  // functions
+Practical Usage
+
+
+
+javascript
+const name = '';
+if (name) {
+  console.log('Name exists'); // won't execute
+}
+
+const arr = [];
+if (arr) {
+  console.log('Array exists'); // will execute (array is truthy!)
+}
+
+const value = 0;
+if (value) {
+  console.log('Has value'); // won't execute (0 is falsy)
+}
+Interview Tip
+Interviewers love asking: "Is an empty array truthy or falsy?" Answer: Truthy. But arr.length is 0, which is falsy.
+
+Common Patterns
+Default values using OR operator:
+
+
+
+
+javascript
+const username = inputName || 'Guest';
+// If inputName is falsy, use 'Guest'
+Nullish coalescing (better for 0 and empty strings):
+
+
+
+
+javascript
+const count = userInput ?? 10;
+// Only uses 10 if userInput is null or undefined
+Why Important for React & Node.js:
+
+Conditional rendering in React depends on truthy/falsy
+Form validation checks empty strings
+API responses may be null or undefined
+Default props and parameters use this concept
+Learning Process for Truthy & Falsy
+Step 1: Memorize the 6 falsy values Step 2: Test different values in console using Boolean(value) Step 3: Practice with if statements and logical operators Step 4: Understand edge cases like empty arrays and objects Step 5: Learn when to use || vs ?? operators
+
+Common Mistakes:
+
+Assuming empty array/object is falsy
+Confusing 0 and '0' (zero string is truthy)
+Not considering NaN in calculations
+Using || when you want to allow 0 as valid input
+
+3. Scope (var, let, const)
+What is Scope?
+Scope determines where variables are accessible in your code. It defines the visibility and lifetime of variables.
+
+Types of Scope
+Global Scope: Variables accessible everywhere in the code Function Scope: Variables accessible only inside a function Block Scope: Variables accessible only inside a block { }
+
+var keyword
+Function scoped, not block scoped
+
+
+
+
+javascript
+function test() {
+  if (true) {
+    var x = 10;
+  }
+  console.log(x); // 10 (accessible outside block)
+}
+Problems with var:
+
+Can be redeclared
+Hoisted to top of function (initialized as undefined)
+No block scope causes bugs
+Can leak into global scope
+
+
+
+javascript
+var name = 'John';
+var name = 'Jane'; // No error, redeclared
+let keyword
+Block scoped
+
+
+
+
+javascript
+function test() {
+  if (true) {
+    let x = 10;
+  }
+  console.log(x); // Error: x is not defined
+}
+Characteristics:
+
+Cannot be redeclared in same scope
+Hoisted but not initialized (Temporal Dead Zone)
+Block scoped
+Preferred for variables that change
+
+
+
+javascript
+let count = 5;
+count = 10; // allowed
+let count = 15; // Error: already declared
+const keyword
+Block scoped, cannot be reassigned
+
+
+
+
+javascript
+const PI = 3.14;
+PI = 3.15; // Error: Assignment to constant variable
+Important: const prevents reassignment, not immutability
+
+
+
+
+javascript
+const person = { name: 'John' };
+person.name = 'Jane'; // Allowed (modifying property)
+person = {}; // Error (reassignment)
+
+const arr = [1, 2, 3];
+arr.push(4); // Allowed (modifying array)
+arr = []; // Error (reassignment)
+When to use:
+
+Use const by default
+Use let when you need to reassign
+Avoid var in modern JavaScript
+Hoisting
+Variables and functions are moved to top of their scope during compilation.
+
+
+
+
+javascript
+console.log(a); // undefined (var is hoisted)
+var a = 5;
+
+console.log(b); // Error: Cannot access before initialization
+let b = 10;
+Interview Answer Template
+Question: "What is the difference between var, let, and const?"
+
+Answer Structure:
+
+Scope: var is function-scoped, let and const are block-scoped
+Reassignment: var and let can be reassigned, const cannot
+Redeclaration: var can be redeclared, let and const cannot
+Hoisting: All are hoisted, but let and const have Temporal Dead Zone
+Best Practice: Use const by default, let when needed, avoid var
+Why Important for React & Node.js:
+
+React hooks use const for state setters
+Block scoping prevents bugs in event handlers
+const ensures configuration objects aren't accidentally changed
+Proper scoping is critical in async operations
+Learning Process for Scope
+Step 1: Understand what scope means conceptually Step 2: Compare var, let, const side by side with examples Step 3: Practice with nested scopes and blocks Step 4: Learn about hoisting and TDZ Step 5: Refactor old var code to let/const
+
+Common Mistakes:
+
+Using var out of habit
+Thinking const makes objects immutable
+Not understanding block scope in loops
+Accessing variables before declaration
+Confusing scope with context (this)
+
+4. Closure
+What is a Closure?
+A closure is a function that remembers variables from its outer scope even after the outer function has finished executing.
+
+Simple Definition: When a function is created inside another function, the inner function has access to the outer function's variables. This combination of function and its lexical environment is a closure.
+
+Basic Example
+
+
+
+javascript
+function outer() {
+  const message = 'Hello';
+  
+  function inner() {
+    console.log(message); // Can access outer's variable
+  }
+  
+  return inner;
+}
+
+const myFunc = outer();
+myFunc(); // Logs: Hello
+Even though outer() finished executing, inner() still remembers message.
+
+Why Closures Happen
+JavaScript functions create a closure over their lexical scope. Every function has access to variables in:
+
+Its own scope
+Outer function's scope
+Global scope
+Practical Example: Counter
+
+
+
+javascript
+function createCounter() {
+  let count = 0;
+  
+  return {
+    increment: function() {
+      count++;
+      return count;
+    },
+    decrement: function() {
+      count--;
+      return count;
+    },
+    getCount: function() {
+      return count;
+    }
+  };
+}
+
+const counter = createCounter();
+console.log(counter.increment()); // 1
+console.log(counter.increment()); // 2
+console.log(counter.getCount()); // 2
+The count variable is private and can only be modified through the returned methods.
+
+Real-World Use Cases
+Data Privacy:
+
+
+
+
+javascript
+function bankAccount(initialBalance) {
+  let balance = initialBalance;
+  
+  return {
+    deposit: function(amount) {
+      balance += amount;
+      return balance;
+    },
+    getBalance: function() {
+      return balance;
+    }
+  };
+}
+
+const myAccount = bankAccount(1000);
+// Cannot directly access balance variable
+Event Handlers:
+
+
+
+
+javascript
+function setupButton(buttonId) {
+  const clickCount = 0;
+  
+  document.getElementById(buttonId).addEventListener('click', function() {
+    clickCount++;
+    console.log('Clicked', clickCount, 'times');
+  });
+}
+Function Factories:
+
+
+
+
+javascript
+function multiplyBy(multiplier) {
+  return function(number) {
+    return number * multiplier;
+  };
+}
+
+const double = multiplyBy(2);
+const triple = multiplyBy(3);
+
+console.log(double(5)); // 10
+console.log(triple(5)); // 15
+Common Closure Pitfall: Loop with var
+
+
+
+javascript
+for (var i = 0; i < 3; i++) {
+  setTimeout(function() {
+    console.log(i); // Logs: 3, 3, 3
+  }, 1000);
+}
+
+// Solution 1: Use let
+for (let i = 0; i < 3; i++) {
+  setTimeout(function() {
+    console.log(i); // Logs: 0, 1, 2
+  }, 1000);
+}
+
+// Solution 2: Create closure with IIFE
+for (var i = 0; i < 3; i++) {
+  (function(j) {
+    setTimeout(function() {
+      console.log(j); // Logs: 0, 1, 2
+    }, 1000);
+  })(i);
+}

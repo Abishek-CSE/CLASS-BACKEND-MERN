@@ -1,0 +1,352 @@
+JavaScript Callbacks, Array Methods & Objects - Complete Guide
+I'll provide you with comprehensive materials covering these essential JavaScript concepts.
+
+1. CALLBACKS
+What is a Callback? A callback is a function passed as an argument to another function, which is then executed inside that function.
+
+javascript
+// Basic callback example
+function greet(name, callback) {
+  console.log('Hello ' + name);
+  callback();
+}
+
+function sayGoodbye() {
+  console.log('Goodbye!');
+}
+
+greet('John', sayGoodbye);
+// Output: Hello John
+//         Goodbye!
+
+// Inline callback
+greet('Sarah', function() {
+  console.log('Nice to meet you!');
+});
+
+// Arrow function callback
+greet('Mike', () => console.log('See you later!'));
+Real-world Callback Examples:
+
+javascript
+// setTimeout - executes callback after delay
+setTimeout(() => {
+  console.log('This runs after 2 seconds');
+}, 2000);
+
+// Event listeners
+const button = document.querySelector('#myButton');
+button.addEventListener('click', function() {
+  console.log('Button clicked!');
+});
+
+// Array methods with callbacks
+const numbers = [1, 2, 3, 4, 5];
+numbers.forEach(function(num) {
+  console.log(num * 2);
+});
+
+2. ARRAY METHODS (Essential ones)
+Basic Array Methods
+javascript
+const fruits = ['apple', 'banana', 'orange'];
+
+// push() - adds to end
+fruits.push('mango'); // ['apple', 'banana', 'orange', 'mango']
+
+// pop() - removes from end
+fruits.pop(); // ['apple', 'banana', 'orange']
+
+// unshift() - adds to beginning
+fruits.unshift('grape'); // ['grape', 'apple', 'banana', 'orange']
+
+// shift() - removes from beginning
+fruits.shift(); // ['apple', 'banana', 'orange']
+
+// slice() - extracts portion (doesn't modify original)
+const citrus = fruits.slice(1, 3); // ['banana', 'orange']
+
+// splice() - adds/removes elements
+fruits.splice(1, 1, 'kiwi'); // ['apple', 'kiwi', 'orange']
+
+// indexOf() - finds index
+const index = fruits.indexOf('orange'); // 2
+
+// includes() - checks if element exists
+fruits.includes('apple'); // true
+
+// join() - converts array to string
+fruits.join(', '); // 'apple, kiwi, orange'
+
+3. HIGHER-ORDER ARRAY METHODS
+These are array methods that take callbacks as arguments.
+
+forEach() - Executes function for each element
+javascript
+const numbers = [1, 2, 3, 4, 5];
+
+numbers.forEach(function(num, index) {
+  console.log(`Index ${index}: ${num}`);
+});
+
+// With arrow function
+numbers.forEach(num => console.log(num * 2));
+map() - Creates new array by transforming each element
+javascript
+const numbers = [1, 2, 3, 4, 5];
+
+const doubled = numbers.map(num => num * 2);
+console.log(doubled); // [2, 4, 6, 8, 10]
+
+const names = ['john', 'sarah', 'mike'];
+const capitalized = names.map(name => name.toUpperCase());
+console.log(capitalized); // ['JOHN', 'SARAH', 'MIKE']
+filter() - Creates new array with elements that pass a test
+javascript
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const evenNumbers = numbers.filter(num => num % 2 === 0);
+console.log(evenNumbers); // [2, 4, 6, 8, 10]
+
+const ages = [12, 18, 25, 16, 30, 14];
+const adults = ages.filter(age => age >= 18);
+console.log(adults); // [18, 25, 30]
+find() - Returns first element that passes a test
+javascript
+const users = [
+  { id: 1, name: 'John' },
+  { id: 2, name: 'Sarah' },
+  { id: 3, name: 'Mike' }
+];
+
+const user = users.find(u => u.id === 2);
+console.log(user); // { id: 2, name: 'Sarah' }
+findIndex() - Returns index of first element that passes a test
+javascript
+const numbers = [10, 20, 30, 40, 50];
+const index = numbers.findIndex(num => num > 25);
+console.log(index); // 2
+reduce() - Reduces array to single value
+javascript
+const numbers = [1, 2, 3, 4, 5];
+
+// Sum all numbers
+const sum = numbers.reduce((total, num) => total + num, 0);
+console.log(sum); // 15
+
+// Find maximum
+const max = numbers.reduce((max, num) => num > max ? num : max, numbers[0]);
+console.log(max); // 5
+
+// Count occurrences
+const fruits = ['apple', 'banana', 'apple', 'orange', 'banana', 'apple'];
+const count = fruits.reduce((acc, fruit) => {
+  acc[fruit] = (acc[fruit] || 0) + 1;
+  return acc;
+}, {});
+console.log(count); // { apple: 3, banana: 2, orange: 1 }
+some() - Tests if at least one element passes
+javascript
+const numbers = [1, 2, 3, 4, 5];
+const hasEven = numbers.some(num => num % 2 === 0);
+console.log(hasEven); // true
+every() - Tests if all elements pass
+javascript
+const numbers = [2, 4, 6, 8];
+const allEven = numbers.every(num => num % 2 === 0);
+console.log(allEven); // true
+sort() - Sorts array elements
+javascript
+const numbers = [3, 1, 4, 1, 5, 9, 2, 6];
+
+// Ascending order
+numbers.sort((a, b) => a - b); // [1, 1, 2, 3, 4, 5, 6, 9]
+
+// Descending order
+numbers.sort((a, b) => b - a); // [9, 6, 5, 4, 3, 2, 1, 1]
+
+// Sorting objects
+const users = [
+  { name: 'John', age: 30 },
+  { name: 'Sarah', age: 25 },
+  { name: 'Mike', age: 35 }
+];
+
+users.sort((a, b) => a.age - b.age); // Sort by age
+
+4. OBJECTS & OBJECT METHODS
+Creating Objects
+javascript
+// Object literal
+const person = {
+  name: 'John',
+  age: 30,
+  city: 'New York'
+};
+
+// Constructor function
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+const person2 = new Person('Sarah', 25);
+
+// Object.create()
+const personProto = {
+  greet() {
+    console.log(`Hello, I'm ${this.name}`);
+  }
+};
+const person3 = Object.create(personProto);
+person3.name = 'Mike';
+Object Methods
+javascript
+const person = {
+  name: 'John',
+  age: 30,
+  city: 'New York',
+  hobbies: ['reading', 'coding']
+};
+
+// Object.keys() - returns array of keys
+const keys = Object.keys(person);
+console.log(keys); // ['name', 'age', 'city', 'hobbies']
+
+// Object.values() - returns array of values
+const values = Object.values(person);
+console.log(values); // ['John', 30, 'New York', ['reading', 'coding']]
+
+// Object.entries() - returns array of [key, value] pairs
+const entries = Object.entries(person);
+console.log(entries);
+// [['name', 'John'], ['age', 30], ['city', 'New York'], ...]
+
+// Iterating through object
+Object.entries(person).forEach(([key, value]) => {
+  console.log(`${key}: ${value}`);
+});
+
+// Object.assign() - copies properties to target object
+const target = { a: 1 };
+const source = { b: 2, c: 3 };
+Object.assign(target, source);
+console.log(target); // { a: 1, b: 2, c: 3 }
+
+// Spread operator (modern way)
+const merged = { ...target, ...source };
+
+// Object.freeze() - prevents modification
+Object.freeze(person);
+person.age = 40; // Won't change
+
+// Object.seal() - prevents adding/removing properties
+Object.seal(person);
+
+// hasOwnProperty() - checks if property exists
+person.hasOwnProperty('name'); // true
+
+// Object.fromEntries() - creates object from entries
+const entries2 = [['name', 'John'], ['age', 30]];
+const obj = Object.fromEntries(entries2);
+console.log(obj); // { name: 'John', age: 30 }
+Methods Inside Objects
+javascript
+const calculator = {
+  num1: 10,
+  num2: 5,
+  
+  // Method shorthand
+  add() {
+    return this.num1 + this.num2;
+  },
+  
+  subtract: function() {
+    return this.num1 - this.num2;
+  },
+  
+  multiply: () => {
+    // Arrow functions don't have their own 'this'
+    // Not recommended for object methods
+    return this.num1 * this.num2;
+  }
+};
+
+console.log(calculator.add()); // 15
+
+5. PRACTICAL EXAMPLES
+Example 1: User Management System
+javascript
+const users = [
+  { id: 1, name: 'John', age: 30, active: true },
+  { id: 2, name: 'Sarah', age: 25, active: false },
+  { id: 3, name: 'Mike', age: 35, active: true },
+  { id: 4, name: 'Emma', age: 28, active: true }
+];
+
+// Get active users
+const activeUsers = users.filter(user => user.active);
+
+// Get user names only
+const names = users.map(user => user.name);
+
+// Find user by id
+const findUser = users.find(user => user.id === 2);
+
+// Calculate average age
+const avgAge = users.reduce((sum, user) => sum + user.age, 0) / users.length;
+
+// Check if any user is under 18
+const hasMinor = users.some(user => user.age < 18);
+
+// Sort by age
+const sortedByAge = users.sort((a, b) => a.age - b.age);
+Example 2: Shopping Cart
+javascript
+const cart = [
+  { name: 'Laptop', price: 1000, quantity: 1 },
+  { name: 'Mouse', price: 25, quantity: 2 },
+  { name: 'Keyboard', price: 75, quantity: 1 }
+];
+
+// Calculate total
+const total = cart.reduce((sum, item) => {
+  return sum + (item.price * item.quantity);
+}, 0);
+console.log(`Total: $${total}`); // Total: $1125
+
+// Get product names
+const products = cart.map(item => item.name);
+
+// Check if expensive item exists
+const hasExpensiveItem = cart.some(item => item.price > 500);
+Example 3: Data Transformation
+javascript
+const students = [
+  { name: 'John', scores: [80, 90, 85] },
+  { name: 'Sarah', scores: [95, 88, 92] },
+  { name: 'Mike', scores: [70, 75, 78] }
+];
+
+// Calculate average score for each student
+const withAverages = students.map(student => ({
+  ...student,
+  average: student.scores.reduce((a, b) => a + b) / student.scores.length
+}));
+
+console.log(withAverages);
+// [
+//   { name: 'John', scores: [80, 90, 85], average: 85 },
+//   { name: 'Sarah', scores: [95, 88, 92], average: 91.67 },
+//   { name: 'Mike', scores: [70, 75, 78], average: 74.33 }
+// ]
+
+6. CHAINING METHODS
+javascript
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const result = numbers
+  .filter(num => num % 2 === 0)  // Get even numbers
+  .map(num => num * 2)            // Double them
+  .reduce((sum, num) => sum + num, 0); // Sum them
+
+console.log(result); // 60

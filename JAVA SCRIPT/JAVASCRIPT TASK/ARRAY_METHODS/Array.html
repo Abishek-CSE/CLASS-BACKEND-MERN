@@ -1,0 +1,85 @@
+<script>
+    //Create a function that accepts a callback and prints “Task Completed” only after the callback runs.
+    function FirstRunning(CallbackRunning){
+        CallbackRunning()
+        console.log("TaskCompleted");
+    }
+    function CallbackRunning(){
+        console.log("It is going to Runs the task");
+    }
+    FirstRunning(CallbackRunning)
+    //Pass a callback to validate age eligibility and print result.
+    function AgeCheck(Age,CondtionCheck){
+        CondtionCheck(Age)
+    }
+    AgeCheck(17,(Age)=>{
+         if(Age <18){
+            console.log("Not Eligible");
+        }
+        else{
+            console.log("Eligible");
+        }
+    })
+    //Simulate API call → success callback → final message.
+    function SimlateApi(final){
+        console.log('API Starts');
+        setTimeout(() => {
+            console.log("Api Going To Runs");
+            setTimeout(()=>{
+                final()
+            },1000)    
+        }, 2000);
+    }
+    SimlateApi(()=>{
+        console.log("Task Completed");
+    })
+    //Add 3 elements to an array and remove the first element.
+    const ArrayValues =[10,20,30]
+    ArrayValues.push(40,50,60)
+    console.log("Adding element",ArrayValues);
+    ArrayValues.shift()
+    console.log("After Shift",ArrayValues);
+    //Replace the last element in an array without using index value.
+    const AddingValues =[1,2,3,4,5,6,7,8]
+    AddingValues.splice(-1,1,30)
+    console.log("Udated Values",AddingValues);
+    //Remove exactly 2 elements from middle of an array.
+    const DeletingValues =[10,20,30,40,50]
+    DeletingValues.splice(DeletingValues.length/2,2,60,70)
+    console.log(DeletingValues);
+    //From an array, return only even numbers using filter.
+    const ValuesofArray =[2,3,4,5,6,7,8]
+     const Even=ValuesofArray.filter( n => n%2==0)
+     console.log("Even Numbers",Even);
+     //Convert array of prices to GST-added prices using map. 18% =0.18
+     const GST =[1000,2000,3000]
+     const ReturnValues = GST.map(tax => tax+tax *0.18)
+     console.log("INCLUDING GST TAX",ReturnValues);
+     //Find total salary from salary array using reduce.
+     const Salaries = [22000,34000]
+     const ReturnSalary =Salaries.reduce((total,Salary)=>total+Salary,0)
+     console.log("Total Salary",ReturnSalary);
+
+
+
+
+
+     //Questions
+     //1.Which array method returns a new array always?
+     //ANSWERS;map(),Filter(),slice(),concat()
+
+     //2.Which method can return single value from array?
+     //ANSWERS; reduce(),ReduceRight(),find(),findIndex(),pop(),shift(),some(),every()
+
+     //3.Is forEach a higher-order function?
+     //A higher-order function (HOF) is a function that accepts another function as an argument or returns a function.
+     //forEach accepts a callback function that runs for each element in the array.
+
+     //4.Can map modify original array?
+     //No ❌, map() does NOT modify the original array.
+     // Explanation
+     // map() always returns a new array with the transformed values.The original array stays unchanged.
+
+     //5.Which method is best for searching condition-based data?
+     //find(),filter(),some(),findIndex()
+</script>

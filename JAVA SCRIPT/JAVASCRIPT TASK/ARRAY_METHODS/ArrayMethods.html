@@ -1,0 +1,33 @@
+<script>
+    //Create a Array of numbers and use map() to square each numbers.
+    const values=[1,2,3,4,5,6,7,8,9,0]
+    const SquareValues =values.map(value => value *value)
+    console.log(SquareValues)
+    //Filter an array of products to show only items under $50
+    const products=[{Name:"Headset",Price:40},{Name:"Bag",Price:30},{Name:"Watch",Price:120}]
+    const Moreitems = products.filter(product => product.Price< 50)
+    console.log(Moreitems);
+    //Use reduce() to count how many times each letter appears in a string
+    const Word ="FEAR"
+    const lettercount =Word.split('').reduce((acc,current_value)=>{
+        acc[current_value]= ( acc[current_value] || 0) +1
+        console.log();
+        return acc
+    },{})
+    console.log(lettercount);
+    //Create an object with methods to calculate area and perimeter of a rectangle
+    //Area Formula = l* w
+    //Perimeter = 2*(l + w)
+    const rectangle ={Length:20,Width:30}
+    const area = rectangle.Length*rectangle.Width
+    console.log(area);
+    const Perimeter =2*(rectangle.Length + rectangle.Width)
+    console.log(Perimeter);
+    //Chain filter(), map(), and sort() to process user data
+    //Select users above 18
+    //Get only their names
+    //Sort names alphabetically
+    const UserDetails = [{ Name: "Virat", age: 39 },{ Name: "RohitSharma", age: 39 },{ Name: "MS Dhoni", age: 44 },{ Name: "Ayush Mathra", age: 17 }]
+    const details = UserDetails.filter(user => user.age > 18).map(user => user.Name).sort();
+    console.log(details);
+</script>

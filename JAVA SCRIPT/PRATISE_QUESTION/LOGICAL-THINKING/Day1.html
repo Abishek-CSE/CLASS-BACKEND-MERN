@@ -1,0 +1,28 @@
+<script>
+    //PRINT NUMBERS FROM 1 TO 20 BUT SKIP NUMBERS DIVISIBLE BY 4
+    //EXPECTED OUTPUT: 1 2 3 5 6 7 9 10 11 13 14 15 17 18 19
+    for(let i=1;i<=20;i++){
+       if(i % 4 == 0){
+            console.log(i);
+        }
+    }
+    //PRINT NUMBERS FROM 1 TO 30:
+    // If number is divisible by 3, print "Fizz" 
+    // Otherwise, print the number
+    for(let j =1;j<=30;j++){
+        if(j %3 ==0){
+            console.log("Fizz");
+        }
+        else{
+            console.log(j);   
+        }
+    }
+    //SUM OF EVEN NUMBERS FROM 1 TO 50 OUTPUT WILL BE 650
+    var result =0
+    for(let k =1;k<=50;k++){
+        if(k %2 ==0){
+            result =result + k
+        }
+    } 
+    console.log(result);
+</script>

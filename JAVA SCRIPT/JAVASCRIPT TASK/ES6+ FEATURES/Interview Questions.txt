@@ -1,0 +1,227 @@
+1️⃣ Closure
+
+A closure is a function that remembers variables from its outer scope even after the outer function has finished.
+
+Example / Real-life use:
+
+function counter() {
+  let count = 0;
+  return function() {
+    count++;
+    return count;
+  }
+}
+const c = counter();
+console.log(c()); // 1
+console.log(c()); // 2
+
+
+Use case: keeping a private counter or state (like click counter).
+
+2️⃣ Switch without break
+
+If you don’t use break, all cases after the matched one will execute (fall-through).
+
+let day = 2;
+switch(day){
+  case 1: console.log("Mon");
+  case 2: console.log("Tue");
+  case 3: console.log("Wed");
+}
+// Output: Tue Wed
+
+3️⃣ Null vs Undefined
+
+undefined → variable declared but not assigned.
+
+null → explicitly assigned “no value”.
+
+let a; // undefined
+let b = null;
+console.log(a, b); // undefined null
+
+4️⃣ Prototype in JS
+
+Every object has a prototype from which it inherits methods.
+
+function Person(name){
+  this.name = name;
+}
+Person.prototype.greet = function(){ console.log("Hello " + this.name); }
+const p = new Person("Abishek");
+p.greet(); // Hello Abishek
+
+5️⃣ Why ES6 was introduced
+
+Cleaner syntax (let, const, arrow functions)
+
+Classes & modules
+
+Promises for async code
+
+Template literals, destructuring, default params
+
+6️⃣ ES5 vs ES6
+Feature	ES5	ES6
+Variables	var	let, const
+Functions	function	arrow functions
+Strings	concat 'Hello ' + name	template literals `Hello ${name}`
+Modules	none	import/export
+Classes	function/prototype	class syntax
+7️⃣ Block Scope
+
+Variables declared with let or const are limited to the block.
+
+if(true){
+  let x = 10;
+  var y = 20;
+}
+console.log(y); // 20
+console.log(x); // Error
+
+8️⃣ Arrow function vs normal function
+
+Arrow: (a,b) => a+b
+
+No own this
+
+Cannot be used as constructor
+
+Normal function:
+
+function add(a,b){ return a+b; }
+
+
+Arrow function:
+
+const add = (a,b) => a+b;
+
+9️⃣ Why arrow functions don’t have their own this
+
+They inherit this from the surrounding scope.
+
+Useful for callbacks and React handlers.
+
+🔟 Template literals
+
+Strings with embedded variables using backticks `.
+
+let name = "Abishek";
+console.log(`Hello ${name}`); // Hello Abishek
+
+1️⃣1️⃣ Destructuring
+
+Object destructuring:
+
+const obj = {a:1, b:2};
+const {a,b} = obj;
+
+
+Array destructuring:
+
+const arr = [1,2];
+const [x,y] = arr;
+
+1️⃣2️⃣ Convert ES5 function to ES6
+
+ES5:
+
+var sum = function(a,b){ return a+b; }
+
+
+ES6:
+
+const sum = (a,b) => a+b;
+
+1️⃣3️⃣ Swap two numbers without third variable
+let a=5, b=10;
+[a, b] = [b, a];
+console.log(a,b); // 10 5
+
+1️⃣4️⃣ Synchronous vs Asynchronous JS
+
+Synchronous: line by line execution.
+
+Asynchronous: runs in background, doesn’t block.
+
+1️⃣5️⃣ Promise
+
+Represents a future value.
+States:
+
+pending → initial
+
+fulfilled → success
+
+rejected → error
+
+const p = new Promise((resolve,reject)=>{
+  let success = true;
+  success ? resolve("Done") : reject("Error");
+});
+
+1️⃣6️⃣ Callback vs Promise
+
+Callback: nested, can cause callback hell
+
+Promise: chainable, cleaner
+
+1️⃣7️⃣ Async/Await
+
+Syntactic sugar over promises
+
+Looks synchronous, easier to read
+
+async function fetchData() {
+  let data = await fetch("url");
+  console.log(data);
+}
+
+
+Better than .then() → easier to read, avoid nested chains.
+
+1️⃣8️⃣ Unhandled promise rejection
+
+Throws error, may crash Node.js apps
+
+Always handle with .catch() or try/catch.
+
+1️⃣9️⃣ Optional chaining (?.)
+
+Safely access nested objects
+
+let user = {};
+console.log(user?.address?.street); // undefined instead of error
+
+2️⃣0️⃣ Nullish coalescing (??)
+
+Returns default value only for null or undefined
+
+let x = 0;
+console.log(x ?? 5); // 0
+console.log(x || 5); // 5
+
+2️⃣1️⃣ || vs ??
+
+|| → uses default for all falsy (0, "", null, undefined)
+
+?? → uses default only for null/undefined
+
+2️⃣2️⃣ Event Loop
+
+JS runtime mechanism to handle async callbacks without blocking.
+
+2️⃣3️⃣ Microtask queue vs Callback queue
+
+Microtask: promises → higher priority
+
+Callback: setTimeout, setInterval → lower priority
+
+2️⃣4️⃣ setTimeout
+
+Asynchronous function, executes after delay.
+
+console.log("Start");
+setTimeout(()=>console.log("Timeout"),0);
+console.log("End");
+// Output: Start End Timeout

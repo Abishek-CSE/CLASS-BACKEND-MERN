@@ -1,0 +1,204 @@
+JavaScript Versions – ES5 vs ES6 vs ES2024 (ES15)
+
+1. What is ECMAScript?
+
+
+ECMAScript (ES) is the official standard that defines how JavaScript works.
+JavaScript follows this standard.
+
+
+Browser vendors (Chrome, Firefox, Edge) implement ECMAScript features.
+
+
+2. ES5 – Old / Foundation JavaScript
+📅 Released: 2009
+ES5 is the base version of JavaScript used for many years.
+
+Key Characteristics
+Stable
+
+Widely supported
+
+Still runs everywhere
+
+ES5 Features
+var
+
+function keyword
+
+for, while loops
+
+if / else
+
+Prototype-based inheritance
+
+Callbacks
+
+Example (ES5)
+var name = "Ravi";
+
+function greet() {
+  return "Hello " + name;
+}
+
+Problems with ES5
+var causes scope issues
+
+Long and repetitive code
+
+Hard to scale large applications
+
+Not developer-friendly for modern apps
+
+Interview Line
+ES5 is stable but verbose and difficult to maintain for large applications.
+
+
+3. ES6 – Modern JavaScript (Most Important)
+📅 Released: 2015
+ES6 changed how developers write JavaScript.
+
+Why ES6 is a Game Changer
+Cleaner syntax
+
+Less bugs
+
+Easy to read and maintain
+
+Perfect for React, Node, Angular
+
+Major ES6 Features
+let, const
+
+Arrow functions =>
+
+class
+
+import / export
+
+Template literals ` `
+
+Destructuring
+
+Spread & Rest operator
+
+Default parameters
+
+Example (ES6)
+const name = "Ravi";
+const greet = () => `Hello ${name}`;
+
+ES5 vs ES6 (Comparison)
+Feature
+ES5
+ES6
+Variables
+var
+let, const
+Scope
+Function
+Block
+Functions
+function
+Arrow functions
+Strings
++ concat
+Template literals
+OOP
+Prototype
+class syntax
+Modules
+❌
+import/export
+Interview Line
+ES6 introduced modern syntax that improved readability, scalability, and maintainability.
+
+
+4. ES6+ (Yearly Updates)
+After ES6, JavaScript gets updates every year.
+
+Version
+Year
+Highlight
+ES7
+2016
+includes()
+ES8
+2017
+async / await
+ES9
+2018
+Object spread
+ES10
+2019
+flat(), flatMap()
+ES11
+2020
+optional chaining, ??
+ES12–14
+2021–23
+minor improvements
+ES15
+2024
+Promise.withResolvers
+
+5. Current Official JavaScript Version
+✅ ES15 (ECMAScript 2024)
+Released: June 2024
+
+Status: Final & Stable
+
+Nature: Incremental update
+
+ES16 (ES2025) is still in proposal stage.
+
+
+6. What is New in ES2024 (ES15)?
+1️⃣ Promise.withResolvers() ⭐ (Main Feature)
+Old Way (Before ES2024)
+let resolveFn, rejectFn;
+const promise = new Promise((resolve, reject) => {
+  resolveFn = resolve;
+  rejectFn = reject;
+});
+
+New Way (ES2024)
+const { promise, resolve, reject } = Promise.withResolvers();
+
+Why This Matters
+Cleaner async code
+
+Better control over promises
+
+Useful in frameworks and libraries
+
+Interview Line
+ES2024 introduced Promise.withResolvers() to simplify manual promise creation.
+
+
+2️⃣ Unicode & String Improvements
+Better emoji handling
+
+Improved international language support
+
+Fewer edge-case string bugs
+
+Mostly internal improvements, no new syntax to learn.
+
+
+10. Reality Check (Industry)
+Companies do NOT expect you to memorize version numbers
+
+They expect strong knowledge of:
+
+ES6 features
+
+async/await
+
+promises
+
+closures
+
+
+✅ End of Notes
+

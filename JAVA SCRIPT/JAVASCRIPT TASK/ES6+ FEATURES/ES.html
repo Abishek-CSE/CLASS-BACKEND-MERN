@@ -1,0 +1,222 @@
+<script>
+    //Task1
+    //Rewrite an ES5 program using let and const.
+    const name ="ABY"
+    let age =23
+    console.log("Using ES6+ Const varaibale Keyword",name)
+    console.log("Using ES6+ let variable Keyword",age)
+    //Show block scope using let inside if.
+    if(true){
+        let x =10;
+        console.log(x);
+    }
+    //Try to reassign a const and observe the error.
+    const name1 ="AK"
+    console.log(name1); // if we give reassign will  TYPE ERROR: "Assignmnet to Constant Variable"
+    //Identify where var causes a bug and fix it with let
+    //var shares one variable for the whole loop.
+    //let creates a new variable for each loop round.
+
+
+    //Task2 Arrow Function:
+    //Convert a normal function into Arrow Function
+    const RightTime =()=>{
+        console.log("Thank you for EveryThings");
+    }
+    RightTime()
+    //Write an arrow function with one parameter.
+    const GoodTime =(e)=>{
+        console.log("Happy New Year",e);
+    }
+    GoodTime(2026)
+    //Write an arrow function that returns an object.
+    const UserDetails =()=>({Name:"AK",Course:"MERN"})
+    const details =UserDetails()
+    console.log(details);
+    //Use arrow function inside map().
+    const Users=[{id:1,FullName:"AK"},{id:2,FullName:"PENGUIN"},{id:3,FullName:"BALA"}]
+    const UpdatedName = Users.map(Users =>({
+        id: Users.id,
+        FullName: Users.FullName
+    }))
+    console.log(UpdatedName);
+
+
+    //Task 3
+    //Template Literals
+    //Print user details using template literals.
+    let LastName ="AK"
+    let CourseName ="MERN"
+    console.log(`Hi My Nmae is ${LastName} and i prefer course is ${CourseName}`);
+    //Convert old string concatenation to template literal.
+    //Old
+    console.log("My Name is "+LastName+" .My Course is "+CourseName+" Thank You");
+    //New
+    console.log(`Hi My Nmae is ${LastName} and i prefer course is ${CourseName}`);
+    //Create a multiline string using backticks.
+    console.log(`Good Morning to all
+    Every Day will be Good Day
+    Be patient  One day you will get a rewards`);
+    //Use expressions inside ${}.
+    console.log(`Hi My Nmae is ${LastName} and i prefer course is ${CourseName}`);
+
+
+    //Class Task
+    //Create a Student class with name and age.
+    //Class -BluePrint 
+    //Constructor- Runs when the object is created
+    //This - Refer to the Current student
+    class Mobile{
+        constructor(brand,price){
+            this.brand = brand
+            this.price = price
+        }
+    }
+    const MobileBrand = new Mobile("IPhone",150000)
+    console.log(MobileBrand.brand)
+    console.log(MobileBrand.price);
+    //Create a BankAccount class with deposit and withdraw methods.
+    class BankAccount{
+        constructor(balance){
+            this.balance =balance
+        }
+        deposit(amount){
+            this.amount =amount
+        }
+        withdraw(amount){
+            this.amount=amount
+        }
+    }
+    const Bank =new BankAccount(2000)
+    Bank.deposit(1500)
+    Bank.withdraw(500)
+    console.log(Bank.balance);
+    console.log(Bank.amount);
+    //Create 3 objects from one class.
+    class student{
+        constructor(subject,Marks){
+            this.subject =subject
+            this.Marks =Marks
+        }
+    }
+    const Student1 = new student(5,78)
+    const Student2 = new student(5,89)
+    const Student3 = new student(5,99)
+    console.log(Student1);
+    console.log(Student2);
+    console.log(Student3);
+    
+
+
+    //Destructuring Tasks
+    //Destructure values from an array.
+    const ArrayNumbers =[93,60,51,85,17]
+    const[a,b,c,d,e]=ArrayNumbers
+    console.log(a,b,c,d,e);
+    //Destructure properties from an object.
+    const VijayMovie ={MovieName:"JANANAYAGAN",Actor:"VIJAY"}
+    const { MovieName, Actor } = VijayMovie;
+    console.log(MovieName, Actor);
+    //Rename variables while destructuring.
+    const {MovieName:VijayLastMovie, Actor:lead}=VijayMovie
+    console.log(VijayLastMovie,lead);
+
+
+    
+
+    //Spread Operator Tasks
+    //Copy an Array using Spread Operators
+    const Jersey =[7,8,9,18,45]
+    const JerseyNumber =[...Jersey]
+    console.log(JerseyNumber);
+    //Merge two arrays using spread.
+    const arr1 =[1,2,3,4,5]
+    const arr2 =[6,7,8,9,0]
+    const TotalArray =[...arr1,...arr2]
+    console.log(TotalArray);
+    //Update an object using spread.
+    const Player ={PlayerName:"DHONI",age:43}
+    const PlayerDetails ={
+        ...Player,
+        age:44
+    }
+    console.log(PlayerDetails.age);
+    //Pass array values into a function using spread.
+    const datas =[10,20,30]
+    function add(a,b,c){
+        console.log(a+b+c);
+    }
+    add(...datas)
+
+
+
+    //REST OPERATOR TASK
+    //Create a function that accepts unlimited arguments.
+    function sumAll(...data){
+        let sum =0
+        for(let num of data){
+            sum +=num;
+        }
+        return sum;
+    }
+    console.log(sumAll(1,2,3,4,5));
+    //Use rest parameter with reduce.
+    function parameters(...reduc){
+        return reduc.reduce((total,nums)=>total + nums, 0)
+    }
+    console.log(parameters(90,10));
+    //Combine rest with destructuring.
+    const numbers = [10, 20, 30, 40, 50];
+    const [first, second, ...rest] = numbers;
+    console.log(first); 
+    console.log(second);
+    console.log(rest);   
+    //Explain rest vs spread with example.
+    //Quick Comparison Table
+//Feature	  Rest (...)	                                      Spread (...)
+//Purpose	 Collect multiple values into array	   Expand array/object into individual items
+//Where	      Function params, destructuring	             Function calls, array/object literals
+//Example	     function sum(...nums) {}	                    Math.max(...[1,2,3])
+
+
+
+//TERNERY OPERATOR TASK
+//SYNTAX =>   condition ? valueIfTrue : valueIfFalse;
+//Check even or odd using ternary.
+const find =24
+const findvalue = find %2 ==0 ? "Even" :"Odd"
+console.log(findvalue);
+//Find pass or fail using ternary.
+const marks =34
+console.log(marks >=35?"Pass" : "Fail");
+//Replace simple if–else with ternary.
+const ages =18
+console.log(ages >=18 ? "YOU CAN VOTE" : "YOU CANT VOTE");
+//Use nested ternary (optional challenge).
+const score = 82;
+const grade = score >= 90 ? "A" : score >= 75 ? "B" : score >= 50 ? "C" : "F";
+console.log(grade); 
+
+
+
+
+//OPTIONAL CHAINING TASK 
+//Access nested object safely using ?
+const user = {name: "Abishek",address: {city: "Chennai",country: "India"}}
+console.log(user.address?.city);
+console.log(user.address?.country);
+
+
+//Nullish Coalescing (??) Tasks
+//Compare || and ?? with value 0.
+const scores =0
+console.log(scores || 10);
+console.log(scores ?? 10);
+//Handle empty string using ??.
+const namedata = ""; 
+console.log(namedata || "Guest");
+console.log(namedata ?? "GOOD");
+//Provide default value using ??.
+let userdata;
+console.log(userdata ?? "VERY GOOD GUEST");   
+</script>

@@ -1,0 +1,62 @@
+ Final Interview Practice Tasks
+Convert an ES5 program into ES6.
+
+Identify ES6 features used in a given code snippet.
+
+Explain why ES6 is more suitable for React.
+
+Answer: “Do we need to learn every ES version?”
+
+
+1️⃣ Convert an ES5 program into ES6
+
+ES5 Example:
+
+var sum = function(a, b){
+    return a + b;
+};
+console.log(sum(2, 3));
+
+
+ES6 Version:
+
+const sum = (a, b) => a + b;
+console.log(sum(2, 3));
+
+
+✅ Key ES6 features used:
+
+const instead of var (block-scoped variable)
+
+Arrow function (a, b) => a + b
+
+2️⃣ Identify ES6 features in a code snippet
+
+Example Code:
+
+const user = { name: "Abishek" };
+const greeting = `Hello ${user.name}`;
+
+
+ES6 Features Used:
+
+const (block-scoped variable)
+
+Template literals (`Hello ${user.name}`)
+
+3️⃣ Why ES6 is more suitable for React
+
+Arrow functions → cleaner syntax for functional components.
+
+let/const → prevent scope-related bugs.
+
+Modules (import/export) → organize React components.
+
+Template literals → easy dynamic JSX content.
+
+Destructuring → cleaner props and state handling.
+
+4️⃣ “Do we need to learn every ES version?”
+
+Answer:
+No, you don’t need to learn every ES version. Focus on ES6+ features, because modern frameworks (React, Node.js) rely on them. Older ES versions (ES3, ES5) are mostly for legacy code.

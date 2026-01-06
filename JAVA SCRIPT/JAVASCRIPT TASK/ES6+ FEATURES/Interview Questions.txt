@@ -180,7 +180,7 @@ async function fetchData() {
 
 Better than .then() → easier to read, avoid nested chains.
 
-1️⃣8️⃣ Unhandled promise rejection
+1️⃣8️⃣ Unhandled promise rejection 
 
 Throws error, may crash Node.js apps
 
@@ -191,7 +191,9 @@ Always handle with .catch() or try/catch.
 Safely access nested objects
 
 let user = {};
-console.log(user?.address?.street); // undefined instead of error
+console.log(user?.address?.street); // undefined instead of errorh
+
+
 
 2️⃣0️⃣ Nullish coalescing (??)
 

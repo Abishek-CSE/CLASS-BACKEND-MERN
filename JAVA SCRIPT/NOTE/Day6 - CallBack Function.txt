@@ -1,0 +1,22 @@
+Synchronous - Code Line by line Exe - output
+
+Aynchronous - code Exe and do some work on outside browser
+then return the values from the Outside process.
+then js process the value.
+
+
+DB , 3rd Party App - API
+
+
+
+Callback
+
+Promise
+Async/Await
+
+
+Promise
+fetch()
+Callback
+Promise
+Async/Await

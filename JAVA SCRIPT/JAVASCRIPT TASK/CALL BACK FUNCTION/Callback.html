@@ -1,0 +1,79 @@
+<script>
+    //setTimeout callback print message
+    function printmessage1( call){
+        setTimeout(()=>{
+            console.log("Welcome to Depression Life",call);
+        },3000)
+    }
+    printmessage1("MY LIFE")
+    //Callback-based calculator
+    function calculator (a,b,Subject,callback){
+        setTimeout(()=>{
+            let res
+            switch(Subject){
+                case "add":
+                    res = a+b
+                    break
+                case "sub":
+                    res = a-b
+                    break
+                case "mul":
+                    res =a*b
+                    break
+                case "div":
+                    res = a/b
+                    break
+                default:
+                    res ="Invalid Operation"
+                
+            }
+            callback(res)
+        },2000)
+    }
+    calculator(12,6,"div",(res)=>{
+        console.log("Value is ",res);
+        
+    })
+    //Nested callback example
+    function LoveToday(PR){
+        setTimeout(()=>{
+            console.log("NORMAL PR");
+            PR()
+        },5000)
+    }
+    function Dragon(PR){
+        setTimeout(() => {
+            console.log("DRAGON PR");
+            PR()
+        },1000);
+    }
+    function Dude(){
+        setTimeout(()=>{
+            console.log("SUPER STAR PR");
+        },2000)
+    }
+    LoveToday(()=>{
+        Dragon(()=>{
+            Dude()
+        })
+    })
+    //Callback error handling
+    function Errorhandling(sad){
+        let success = false
+        if(success){
+            sad("Successful Model")
+        }
+        else{
+            sad("Failure Model SomeThing Went Wrong")
+        }
+    }
+    Errorhandling((err, result)=>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log(result);   
+        }
+    })
+    //Simulate API using callback
+</script>

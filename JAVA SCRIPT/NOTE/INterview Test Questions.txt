@@ -1,0 +1,33 @@
+Test JS - Important JavaScript Interview Questions
+TASK 1 - MAKE A WEBSITE BASED ON JS ONLY ATTRACTIVE WEBSITE
+
+TEST : Js Interview Questions - Test (06-01-2026 - 5PM to 6PM)
+
+Why let and const were introduced when var already existed?
+How does JavaScript decide the data type of a variable at runtime?
+
+What is the difference between == and ===, and why do companies prefer ===?
+
+How do logical operators (&&, ||) help in writing cleaner conditional code?
+
+When would you choose switch over if-else in real applications?
+
+Why does do-while loop execute at least once even if the condition is false?
+
+What happens internally when a for loop runs in JavaScript?
+
+How does array indexing work, and what happens if you access an index that does not exist?
+
+What is the difference between map() and forEach() in terms of return value and use case?
+
+Why are higher-order array methods preferred over traditional loops?
+
+How is an object stored in memory compared to a primitive value?
+
+What is the difference between iterating an object using for...in and Object.keys()?
+
+What is the difference between parameters and arguments, and how do callbacks fit into this?
+
+Why does asynchronous JavaScript not block the main thread, and how does this help the UI?
+
+What is the role of the V8 engine in executing JavaScript and supporting React applications?

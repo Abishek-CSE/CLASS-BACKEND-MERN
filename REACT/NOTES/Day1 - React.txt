@@ -1,0 +1,56 @@
+WHAT IS THE MAIN CORE WORKING IN REACT?
+COMPONENT - VITURAL DOM - ROUTING - SPA- BUILD SYSTEM JSX - JS INSIDE
+HTML AND CSS - COMPILER - V8  - BABEL COMPILER => TRANSFILER -
+HIGH LEVEL TO HIGH LEVEL LANGUAGE.
+
+
+WHAT IS DIFFERENCE BETWEEN REACT AND ANGULAR ADN NEXT JS
+REACT => IT IS LIBARAARY
+ANGULAR => IT IS FRAMEWORK 
+NEXT JS => IT IS REACT FRAMEWORK -SEO - SERVER SIDE RENDERING AND CLIENT SIDE RENDERING BOTH ARE AVAILABLE IN THE 
+NEXT JS 
+
+
+WHAT ARE ALL THE OTHER LIBRARY SAME LIKE REACT?
+VUE.JS
+SOLID.JS
+VANILLA.JS
+
+What is DOM?
+DOM = Document Object Model
+
+When the browser loads HTML
+
+It converts it into a tree structure
+
+This tree is called DOM
+
+
+What is Virtual DOM?
+Virtual DOM = Lightweight copy of the real DOM
+
+Created by React
+
+Stored in memory (RAM)
+
+It is a JavaScript object
+
+👉 It is NOT part of the browser DOM
+
+Where is Virtual DOM?
+
+Inside browser memory
+
+Managed by React
+
+You cannot see it directly
+
+You can inspect behavior using React DevTools
+
+
+REACT PROJECT FILE SETUP
+1.REACT PROJECT FILE SETUP - CRA
+CRA - CREATE REACT APP - CORE BASIC THINGS
+
+
+

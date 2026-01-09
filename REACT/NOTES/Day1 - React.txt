@@ -53,4 +53,70 @@ REACT PROJECT FILE SETUP
 CRA - CREATE REACT APP - CORE BASIC THINGS
 
 
+React:
+1.Why The Intstry Need the React?
+
+2.what is the main core working in react?
+Component - Vitual DOM - Routing - SPA - Build System
+jsx - js inside html and css - compiler - V8
+bable
+
+
+
+3.Why use React instead of JS
+
+
+
+4.What is the different Between React and Angular and Next JS and why?
+
+
+5. what are all the other librarys same like react?
+
+6. What is DOM? What is Virtual dom?
+
+7. where is the Virtual DOM in. your Machine How you see it?
+8. What is traspiler? and what is compiler?
+9. what is library? what is frameWork
+10.what is Filehandle and folders + Images handling
+
+11.what is extension why jsx and why js
+12.what topics you need to build strong react website?
+
+
+Phase Create -
+Node Install
+
+React Project File Setup - CRA/VITE
+
+CRA  - create react app - core basic things
+
+cmd - VS - system CMD
+
+npx create-react-app projectname
+
+port number - 3000
+
+npm start
+
+VITE
+cmd - VS - system CMD
+
+npm create vite@latest projectname
+
+react
+
+js
+
+npm run dev
+
+localhost port number - 5173
+
+
+
+Phase Create:
+Project set
+write your Stroy
+using html tags
+3 components add
+
 

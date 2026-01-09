@@ -1,0 +1,56 @@
+1) Components (class + function) + CSS + Image
+Create a single page that shows a profile section:
+
+One function component: ProfileCardFn.
+
+Use a local image from src/assets as avatarUrl.
+
+Add basic CSS (border, padding, hover scale on card) in ProfileCard.css.
+
+
+3) Rendering primitives, arrays, objects
+Create RenderingPlayground component:
+
+Render:
+
+A primitive: name (string), age (number).
+
+An object: user = { name, city } → show both fields.
+
+An array of strings: ["HTML","CSS","JS","React"] using map.
+
+An array of objects: products = [{id,name,price},...] as a simple table.
+
+Import and render RenderingPlayground inside App.​
+
+
+4) Conditional / optional / nullish
+Create UserStatus component with prop user:
+
+If user is null, show: “Loading user…”.
+
+Else show:
+
+user?.name ?? "Guest User"
+
+user?.email ?? "No email provided"
+
+Also show “Active User” only if user?.isActive is true (ternary or &&).​
+
+In App, keep one state and toggle between null and a user object with a button.
+
+
+5) React Router DOM basic SPA
+In the same project, install router: npm install react-router-dom.​
+
+Wrap <App /> with <BrowserRouter> in main.jsx.​
+
+In App, create three routes using Routes and Route:
+
+/ → Home
+
+/about → About
+
+/contact → Contact
+
+Add a nav bar with <Link> to all three routes at the top.

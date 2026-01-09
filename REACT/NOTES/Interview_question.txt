@@ -1,0 +1,227 @@
+Part 1: Class Components & Advanced Concepts
+1️⃣ What is a class component in React, and how is it different from a functional component?
+
+Class Component
+
+Uses ES6 class
+
+Extends React.Component
+
+Has lifecycle methods
+
+Uses this.state and this.setState()
+
+Functional Component
+
+Uses JavaScript functions
+
+Uses Hooks (useState, useEffect)
+
+Simpler and preferred in modern React
+
+Key Differences
+
+Feature	Class Component	Functional Component
+Syntax	Class-based	Function-based
+State	this.state	useState
+Lifecycle	Lifecycle methods	Hooks
+this keyword	Required	Not needed
+Performance	Slightly heavier	Lighter & faster
+Usage today	Less preferred	Recommended
+
+👉 Modern React uses functional components with hooks
+
+2️⃣ Explain React class lifecycle methods and their use cases
+
+Lifecycle methods are called at different phases of a component.
+
+🔹 Mounting (Component creation)
+Method	Use Case
+constructor()	Initialize state
+render()	Render UI
+componentDidMount()	API calls, subscriptions
+🔹 Updating (State/props change)
+Method	Use Case
+shouldComponentUpdate()	Performance optimization
+render()	Re-render UI
+componentDidUpdate()	React to prop/state changes
+🔹 Unmounting (Component removal)
+Method	Use Case
+componentWillUnmount()	Cleanup (timers, listeners)
+🔹 Error Handling
+Method	Use Case
+componentDidCatch()	Catch UI errors
+3️⃣ How does setState work, and why is it asynchronous?
+
+setState() does not update immediately
+
+React batches multiple updates for better performance
+
+UI updates happen after reconciliation
+
+Why async?
+
+Prevents unnecessary re-renders
+
+Improves performance
+
+Ensures consistency
+
+Correct way when depending on previous state
+
+this.setState(prevState => ({
+  count: prevState.count + 1
+}));
+
+4️⃣ What is PureComponent and how is it different?
+
+PureComponent
+
+Automatically implements shouldComponentUpdate()
+
+Uses shallow comparison of props & state
+
+Feature	Component	PureComponent
+Re-render	Always	Only if data changes
+Optimization	Manual	Automatic
+Comparison	No	Shallow
+
+Use Case
+
+Performance optimization
+
+When props/state are immutable
+
+⚠️ Avoid with deep objects (can cause bugs)
+
+5️⃣ How do you implement Error Boundaries, and why class components?
+
+Error Boundaries
+
+Catch JavaScript errors in UI
+
+Prevent app crash
+
+Show fallback UI
+
+Implemented using
+
+componentDidCatch()
+
+getDerivedStateFromError()
+
+❗ Why only class components?
+
+Hooks cannot catch render-time errors
+
+React currently supports error boundaries only via classes
+
+Use Cases
+
+Wrapping pages
+
+Handling unexpected UI crashes
+
+Improving UX stability
+
+🔹 Part 2: Basic React Interview Questions (5)
+6️⃣ What is React, and what problem does it solve?
+
+React
+
+JavaScript library for building UIs
+
+Created by Facebook
+
+Component-based architecture
+
+Problems it solves
+
+Slow DOM manipulation
+
+Complex UI updates
+
+Code reusability issues
+
+React Solution
+
+Virtual DOM
+
+Component-based design
+
+One-way data flow
+
+7️⃣ What is JSX and how is it different from HTML?
+
+JSX
+
+JavaScript XML
+
+Allows writing HTML-like syntax in JS
+
+Differences
+
+JSX	HTML
+Compiled by Babel	Used directly
+className	class
+Expressions allowed {}	Not allowed
+CamelCase attributes	Normal
+8️⃣ Difference between props and state
+Feature	Props	State
+Ownership	Parent	Component
+Mutability	Read-only	Mutable
+Purpose	Pass data	Manage data
+
+Example
+
+Props → username
+
+State → login status
+
+9️⃣ What is the Virtual DOM?
+
+Lightweight copy of the real DOM
+
+Stored in memory
+
+React compares changes using diffing algorithm
+
+Process
+
+Change happens
+
+Virtual DOM updated
+
+React finds minimal changes
+
+Real DOM updated efficiently
+
+👉 Result: Faster UI updates
+
+🔟 What is a component in React? Types?
+
+Component
+
+Reusable UI block
+
+Accepts input (props)
+
+Returns UI
+
+Main Types
+
+Functional Components (most used)
+
+Class Components
+
+Higher Order Components
+
+Controlled & Uncontrolled Components
+
+✅ Interview Tip
+
+If asked:
+
+“Which component type should we use today?”
+
+✔️ Answer: Functional components with Hooks, unless error boundaries are needed.

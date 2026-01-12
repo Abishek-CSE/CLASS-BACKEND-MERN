@@ -1,0 +1,282 @@
+1. Props – basics
+Notes (English + simple Tamil)
+
+Props = properties → data passed from parent to child components.​
+
+Read-only; child cannot modify props directly (only read and use).
+
+Parent decides “what to show”, child just displays.
+
+// Parent.jsx
+import ProfileCard from "./ProfileCard";
+
+function Parent() {
+  return (
+    <div>
+      <ProfileCard
+        name="Sanjay"
+        age={24}
+        city="Chennai"
+        isAdmin={true}
+      />
+    </div>
+  );
+}
+
+export default Parent;
+
+
+// ProfileCard.jsx
+function ProfileCard({ name, age, city, isAdmin }) {
+  return (
+    <div>
+      <h2>{name}</h2>
+      <p>Age: {age}</p>
+      <p>City: {city}</p>
+      {isAdmin && <span>Admin</span>}
+    </div>
+  );
+}
+
+export default ProfileCard;
+2. defaultProps – fallback values
+Notes
+
+defaultProps = default value when parent does not send that prop.​
+
+Good for labels, placeholders, optional flags.
+
+For function components, today many devs prefer default values in destructuring, but defaultProps still works (except on some modern patterns).
+
+// Button.jsx
+function Button({ label, variant }) {
+  const styles = {
+    primary: { backgroundColor: "blue", color: "white" },
+    secondary: { backgroundColor: "gray", color: "white" },
+  };
+
+  return (
+    <button style={styles[variant]}>
+      {label}
+    </button>
+  );
+}
+
+Button.defaultProps = {
+  label: "Click Me",
+  variant: "primary",
+};
+
+export default Button;
+// Parent.jsx
+import Button from "./Button";
+
+function Parent() {
+  return (
+    <>
+      {/* Uses default label + default variant */}
+      <Button />
+
+      {/* Custom label, default variant */}
+      <Button label="Submit" />
+
+      {/* Custom label + variant */}
+      <Button label="Cancel" variant="secondary" />
+    </>
+  );
+}
+
+export default Parent;
+3. propTypes – runtime type checking
+Notes
+
+propTypes = runtime validation of props; gives warnings in console in dev mode.​
+
+Helps in big projects / team projects to catch mistakes early.
+
+Common types: string, number, bool, func, array, object, shape, oneOf.
+
+npm install prop-types
+// Card.jsx
+import PropTypes from "prop-types";
+
+function Card({ title, description, isFeatured }) {
+  return (
+    <div style={{ border: isFeatured ? "2px solid gold" : "1px solid #ccc" }}>
+      <h3>{title}</h3>
+      <p>{description}</p>
+      {isFeatured && <span>Featured</span>}
+    </div>
+  );
+}
+
+Card.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  isFeatured: PropTypes.bool,
+};
+
+Card.defaultProps = {
+  description: "No description provided",
+  isFeatured: false,
+};
+
+export default Card;
+// Parent.jsx
+import Card from "./Card";
+
+function Parent() {
+  return (
+    <>
+      <Card title="React Basics" />
+      <Card
+        title="Advanced React"
+        description="Hooks, Context, Performance"
+        isFeatured={true}
+      />
+    </>
+  );
+}
+
+export default Parent;
+4. Parent → Child structure + callback (child → parent)
+Notes
+
+Parent holds state.
+
+Parent passes:
+
+data props (value)
+
+function props (callbacks)
+
+Child calls function prop to send data back to parent.​
+
+Example: Child controls parent count
+
+
+jsx
+// CounterParent.jsx
+import { useState } from "react";
+import CounterChild from "./CounterChild";
+
+function CounterParent() {
+  const [count, setCount] = useState(0);
+
+  const handleIncrement = () => setCount((c) => c + 1);
+  const handleDecrement = () => setCount((c) => c - 1);
+
+  return (
+    <div>
+      <h2>Parent Count: {count}</h2>
+      <CounterChild
+        count={count}
+        onIncrement={handleIncrement}
+        onDecrement={handleDecrement}
+      />
+    </div>
+  );
+}
+
+export default CounterParent;
+// CounterChild.jsx
+function CounterChild({ count, onIncrement, onDecrement }) {
+  return (
+    <div>
+      <p>Child view: {count}</p>
+      <button onClick={onIncrement}>+1</button>
+      <button onClick={onDecrement}>-1</button>
+    </div>
+  );
+}
+
+export default CounterChild;
+5. Combined example – props + defaultProps + propTypes + parent–child
+Notes
+
+This brings everything into one small mini‑project.
+
+Good as interview-style task for students.
+
+Example: UserList (Parent) + UserItem (Child)
+
+// UserItem.jsx
+import PropTypes from "prop-types";
+
+function UserItem({ name, role, isActive }) {
+  return (
+    <li style={{ opacity: isActive ? 1 : 0.5 }}>
+      <strong>{name}</strong> - {role} {isActive ? "(Active)" : "(Inactive)"}
+    </li>
+  );
+}
+
+UserItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  role: PropTypes.string,
+  isActive: PropTypes.bool,
+};
+
+UserItem.defaultProps = {
+  role: "Student",
+  isActive: false,
+};
+
+export default UserItem;
+// UserList.jsx
+import UserItem from "./UserItem";
+
+function UserList() {
+  const users = [
+    { id: 1, name: "Arun", role: "Developer", isActive: true },
+    { id: 2, name: "Priya" }, // uses default role + isActive
+    { id: 3, name: "Karthik", role: "Designer", isActive: false },
+  ];
+
+  return (
+    <ul>
+      {users.map((user) => (
+        <UserItem
+          key={user.id}
+          name={user.name}
+          role={user.role}
+          isActive={user.isActive}
+        />
+      ))}
+    </ul>
+  );
+}
+
+export default UserList;
+
+
+
+
+
+Main Reason: defaultProps DOES NOT work in some cases
+⚠️ In modern React (18+)
+
+defaultProps does NOT reliably work for functional components
+
+It only works properly for class components
+
+That’s why your default value is not appearing
+
+👉 This is NOT your fault — it’s a React change.
+
+
+
+
+
+
+Task 4: Multi-Level Props Drilling (React)
+
+This task shows how data and functions are passed through multiple component levels using props — even if some components don’t directly use them.
+
+🧠 Concept: Props Drilling
+
+Passing props from Parent → Child → Grandchild
+
+Intermediate components act as pass-through
+
+Becomes hard to manage in large apps (solved later by Context / Redux)

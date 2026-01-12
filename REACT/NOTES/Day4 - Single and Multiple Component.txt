@@ -1,0 +1,27 @@
+Parent -> Data - change
+child -> refelct - change
+child -> data come from parent - data you can't change
+
+app - addimng component
+
+component - continer
+continer - logic
+list - showing
+
+
+App - app
+Route - path
+compoent - logic compoent
+container - logic
+showing - ui
+
+
+Difference between onClick vs onSubmit?
+
+Why use single state object for large forms?
+
+How to avoid unnecessary re-renders in forms?
+
+How would you scale this form for production?
+
+Why controlled components are preferred?

@@ -1,0 +1,192 @@
+React Router DOM (RRD)
+
+React Router DOM is a library used to handle navigation and routing in React single-page applications (SPA) without page reload.
+
+👉 It maps URL paths → React components.
+
+🧭 BrowserRouter
+
+BrowserRouter is the main router wrapper.
+
+Uses HTML5 history API
+
+Keeps UI in sync with browser URL
+
+Must wrap your entire app (or routing part)
+
+📝 Rule: You can use only one BrowserRouter in an app.
+
+<BrowserRouter>
+  <App />
+</BrowserRouter>
+
+🗂️ Routes & Route
+Routes
+
+Container for all routes
+
+Replaces older Switch
+
+Route
+
+Defines path + component
+
+<Routes>
+  <Route path="/" element={<Home />} />
+  <Route path="/about" element={<About />} />
+</Routes>
+
+
+🧠 How it works:
+
+When URL matches path, its component renders
+
+Only one matching route renders at a time
+
+🚫 Navigation using <a href="">
+
+Using normal HTML anchor tags:
+
+<a href="/about">About</a>
+
+❌ Problems
+
+Page reloads completely
+
+React state is lost
+
+SPA behavior breaks
+
+📌 Avoid <a> for internal navigation
+
+✅ Link
+
+Link replaces <a> in React apps.
+
+Prevents page reload
+
+Fast navigation
+
+Maintains SPA behavior
+
+<Link to="/about">About</Link>
+
+
+🟢 Use Link for internal routes
+🔵 Use <a> only for external links
+
+⭐ NavLink (Active Tab)
+
+NavLink is like Link but knows when it is active.
+
+Benefits
+
+Adds active class automatically
+
+Useful for navbar menus
+
+<NavLink to="/home">Home</NavLink>
+
+Active Styling
+<NavLink
+  to="/home"
+  className={({ isActive }) => isActive ? "active" : ""}
+>
+  Home
+</NavLink>
+
+
+🧠 Common interview point:
+
+Difference between Link and NavLink
+✔ NavLink supports active styling
+
+🧩 Outlet (Child Component Rendering)
+
+Outlet is used for nested routes.
+
+Why?
+
+To show child components inside parent layout
+
+<Route path="/dashboard" element={<Dashboard />}>
+  <Route path="profile" element={<Profile />} />
+</Route>
+
+
+In Dashboard.jsx:
+
+<Outlet />
+
+
+📌 URL:
+
+/dashboard → Dashboard
+
+/dashboard/profile → Dashboard + Profile inside Outlet
+
+🧭 useNavigate() Hook
+
+useNavigate() is used for programmatic navigation.
+
+When to use
+
+After login
+
+After form submit
+
+Button click navigation
+
+const navigate = useNavigate();
+
+navigate("/home");
+
+Go Back / Forward
+navigate(-1); // back
+navigate(1);  // forward
+
+
+🧠 Alternative to:
+
+history.push()
+
+🎨 React Icons
+
+React Icons is a library that provides icons as React components.
+
+Benefits
+
+Easy to use
+
+Lightweight
+
+Supports many icon packs
+
+import { FaHome } from "react-icons/fa";
+
+<FaHome />
+
+Common Packs
+
+fa → Font Awesome
+
+md → Material Design
+
+ai → Ant Design
+
+bs → Bootstrap
+
+📌 Icons behave like normal React components
+✔ Can style using CSS or inline styles
+
+📌 Quick Interview Summary
+Concept	Purpose
+BrowserRouter	Wraps app for routing
+Routes	Holds all Route components
+Route	Maps path to component
+a href	Causes page reload ❌
+Link	SPA navigation
+NavLink	Active navigation styling
+Outlet	Renders child routes
+useNavigate	Programmatic navigation
+React Icons	Icon components

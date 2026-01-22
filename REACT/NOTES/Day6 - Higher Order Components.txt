@@ -1,0 +1,130 @@
+HOC => Higher Order Component =>A components  inside a function used passed as a parameter and return a enhanced components
+
+HOC (Higher Order Component)
+📌 What is HOC?
+
+HOC is a function
+
+It takes a component as input
+
+It returns a new enhanced component
+
+Used for code reusability and logic sharing
+
+👉 HOC does not modify the original component
+👉 It wraps the component and adds extra behavior
+
+📌 HOC Syntax
+const withText = (WrappedComponent) => (props) => {
+  return <WrappedComponent {...props} />
+}
+
+export default withText;
+
+📌 How HOC Works
+
+Pass a component to HOC
+
+HOC returns a new component
+
+New component renders the original component with extra props/logic
+
+📌 Example Usage
+import Button from "./Button"
+import withText from "./withText"
+
+const EnhancedButton = withText(Button)
+
+export default EnhancedButton
+
+📌 Why use HOC?
+
+Authentication check
+
+Logging
+
+Permission handling
+
+Reusable UI logic
+
+📌 HOC Interview Points
+
+HOC is a pattern, not a React feature
+
+Common naming: withAuth, withLoading
+
+Props must be forwarded using {...props}
+
+🔹 HOOKS
+📌 What are Hooks?
+
+Hooks allow you to use state and lifecycle features
+
+Used only in functional components
+
+Introduced in React 16.8
+
+🔹 useState Hook
+📌 What is useState()?
+
+useState() is used to hold component state
+
+It can store:
+
+Primitive values → string, number, boolean
+
+Non-primitive values → object, array
+
+📌 Syntax
+const [state, setState] = useState(initialValue)
+
+📌 Example (Primitive Value)
+const [count, setCount] = useState(0)
+
+<button onClick={() => setCount(count + 1)}>
+  Increment
+</button>
+
+📌 Example (Non-Primitive Value)
+const [user, setUser] = useState({
+  name: "Abi",
+  age: 22
+})
+
+setUser({ ...user, age: 23 })
+
+📌 How useState Works
+
+React re-renders the component on every state update
+
+Updated value is immediately shown on the screen
+
+State updates happen on:
+
+Events (click, submit)
+
+User input
+
+API response
+
+📌 Why UI updates automatically?
+
+React follows state-driven rendering
+
+When state changes → component re-renders → UI updates
+
+📌 Important Rules of Hooks
+
+Call hooks only at top level
+
+Do not call hooks inside loops or conditions
+
+Use hooks only inside functional components
+
+📌 useState Interview Points
+
+State updates are asynchronous
+
+Never modify state directly
+
+Always use setter function (setState)  

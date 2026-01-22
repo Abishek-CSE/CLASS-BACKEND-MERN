@@ -1,0 +1,157 @@
+🔁 React Update Phase
+
+The Update Phase happens when data changes and React needs to re-render UI.
+
+🔄 What triggers an update?
+
+State change (useState)
+
+Props change
+
+Context change
+
+🔁 Update Phase Flow (Very Important)
+UI → Event → Data Change → State → Hook → Re-render UI
+
+
+Example:
+
+User types in input
+
+onChange event fires
+
+State updates using setState
+
+React re-renders component
+
+Updated UI shown
+
+🧠 Rendering in Update Phase
+
+During update:
+
+React calls the component function again
+
+Hooks run in the same order
+
+JSX is re-evaluated
+
+DOM updates efficiently (Virtual DOM)
+
+⚠️ React does NOT reload the page
+
+🧩 Hooks
+What are Hooks?
+
+Hooks are special functions
+
+Allow state & lifecycle features in functional components
+
+Must start with use
+
+Examples:
+
+useState
+
+useEffect
+
+useContext
+
+📦 State in React
+What is State?
+
+State holds dynamic data
+
+When state changes → component re-renders
+
+State can be:
+
+Primitive (number, string, boolean)
+
+Non-primitive (array, object)
+
+🪝 useState Hook
+Syntax
+const [state, setState] = useState(initialValue)
+
+Example 1: Number State
+const [title, setTitle] = useState(1)
+
+
+title → current value
+
+setTitle → function to update value
+
+Initial value = 1
+
+setTitle(2) // triggers re-render
+
+📝 Form State (Boolean)
+Example:
+const [form, setForm] = useState(true)
+
+Meaning:
+
+true → show form
+
+false → hide form
+
+🧾 Form Detailed Example
+Component Example
+import { useState } from "react"
+
+const FormExample = () => {
+  const [form, setForm] = useState(true)
+
+  return (
+    <>
+      <button onClick={() => setForm(!form)}>
+        Toggle Form
+      </button>
+
+      {form && (
+        <form>
+          <input type="text" placeholder="Enter name" />
+          <button>Submit</button>
+        </form>
+      )}
+    </>
+  )
+}
+
+export default FormExample
+
+🔍 How it works:
+
+Button click → event handler
+
+setForm(!form) changes state
+
+React updates state
+
+Component re-renders
+
+UI updates (form show/hide)
+
+🎯 Event Handling in Update Phase
+Example:
+<button onClick={handleClick}>Click</button>
+
+const handleClick = () => {
+  setForm(false)
+}
+
+
+Event → State → Hook → Re-render → UI update
+
+📌 Key Interview Points
+
+Hooks run on every render
+
+useState causes re-render
+
+State updates are asynchronous
+
+Do NOT modify state directly
+
+Hooks must be called at top level

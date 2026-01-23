@@ -1,0 +1,207 @@
+👇
+
+🔹 State (Class Component)
+
+State is an object used to store and manage data inside a class component.
+
+State controls dynamic UI behavior.
+
+Never update state directly.
+
+State updates must happen using setState().
+
+📌 Key Points
+
+State is mutable only through setState
+
+When state updates:
+
+Event is triggered
+
+setState() is called
+
+Component re-renders
+
+Updated value appears on the screen
+
+Example (Class Component)
+class Counter extends React.Component {
+  state = {
+    count: 0
+  }
+
+  increment = () => {
+    this.setState({ count: this.state.count + 1 })
+  }
+
+  render() {
+    return (
+      <>
+        <h1>{this.state.count}</h1>
+        <button onClick={this.increment}>+</button>
+      </>
+    )
+  }
+}
+
+🔹 useState Hook (Functional Component)
+
+useState is a hook
+
+Used only in functional components
+
+Holds:
+
+State value
+
+State update function
+
+Both are declared in the same line
+
+Syntax
+const [state, setState] = useState(initialValue)
+
+Example
+const Counter = () => {
+  const [count, setCount] = useState(0)
+
+  return (
+    <>
+      <h1>{count}</h1>
+      <button onClick={() => setCount(count + 1)}>+</button>
+    </>
+  )
+}
+
+📌 Important
+
+When you call state update function:
+
+Event triggers
+
+State updates
+
+Component re-renders
+
+UI updates automatically
+
+🔹 State Update → Re-render Flow (Both)
+User Event (click / input)
+        ↓
+State Update (setState / setCount)
+        ↓
+React Re-render
+        ↓
+UI Updated
+
+🔹 Form Handling (Single Input)
+Example
+const Form = () => {
+  const [username, setUsername] = useState("")
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(username)
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <button>Submit</button>
+    </form>
+  )
+}
+
+📌 Concepts
+
+Controlled Component
+
+onChange → updates state
+
+onSubmit → handles form action
+
+preventDefault() → avoids page refresh
+
+🔹 Form Handling (Multiple Inputs)
+Using Object State
+const Form = () => {
+  const [form, setForm] = useState({
+    username: "",
+    email: ""
+  })
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  return (
+    <>
+      <input
+        name="username"
+        value={form.username}
+        onChange={handleChange}
+      />
+      <input
+        name="email"
+        value={form.email}
+        onChange={handleChange}
+      />
+    </>
+  )
+}
+
+🔹 useState Object Update (VERY IMPORTANT 🔥)
+❌ Wrong Way
+form.username = "React"
+setForm(form)
+
+
+➡️ React will NOT re-render
+
+✅ Correct Way (Spread Operator)
+setForm({
+  ...form,
+  username: "React"
+})
+
+📌 Why?
+
+React checks reference
+
+Spread creates a new object
+
+New reference → React re-renders
+
+🔹 JavaScript Object Update Example
+let a = { name: "React" }
+
+a.name = "Node"
+
+console.log(a)
+
+Output
+{ name: "Node" }
+
+📌 Explanation
+
+Objects are reference types
+
+Direct mutation changes the same object
+
+In React, direct mutation is bad
+
+Always create a new object
+
+🔹 React vs JS Object Update
+JavaScript	React
+Direct mutation allowed	❌ Not allowed
+Reference doesn’t matter	Reference matters
+No re-render	Needs re-render
+a.name = "Node"	{...state, name:"Node"}

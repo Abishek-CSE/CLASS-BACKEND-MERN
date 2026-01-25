@@ -1,0 +1,171 @@
+1.What is useState in React? Why is it used in form handling?
+useState is a React Hook used to store and update data inside a functional component.
+Forms need live data (what user types)
+useState stores input values
+On every change → state updates → UI re-renders
+
+2.What is the difference between controlled and uncontrolled components?
+Controlled Component
+Input value is controlled by React state
+Uses value + onChange
+Uncontrolled Component
+Input handled by DOM
+Uses ref
+
+3.How does localStorage work in React?
+Browser storage
+Stores data as key–value pairs
+Data persists even after page refresh
+
+4.Why convert objects to JSON before storing?
+localStorage.setItem("user", JSON.stringify(user));
+
+5.What is a Higher Order Component (HOC)?
+A HOC is a function that: Takes a component Returns a new enhanced component
+
+6.Purpose of React Router DOM
+Used for routing in React SPA:
+Multiple pages without reload
+URL-based navigation
+Key features:
+<BrowserRouter>
+<Routes>
+<Route>
+<Link>
+
+7.Why <Link> instead of <a> tag?
+<a>:
+Page reloads
+slower
+Loose state
+<Link>
+No Reload
+Faster
+Keep state
+
+8.Three array methods used in React
+.map()	Display lists
+.filter()	Remove items
+.find()	Find one item
+
+9.Conditional Rendering in React
+{isLoggedIn ? <Dashboard /> : <Login />}
+
+10.Role of useParams
+<Route path="/user/:id" element={<User />} />
+const { id } = useParams();
+Used in:
+Edit pages
+View details
+Dynamic routing
+
+11.Create a Login page that reads user data from localStorage and validates the credentials.
+
+const Login = () => {
+  const [login, setLogin] = useState({ email: "", password: "" });
+
+  const handleLogin = () => {
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const validUser = users.find(
+      u => u.email === login.email && u.password === login.password
+    );
+
+    if (validUser) {
+      localStorage.setItem("isLogin", true);
+      alert("Login Success");
+    } else {
+      alert("Invalid Credentials");
+    }
+  };
+
+  return (
+    <>
+      <input onChange={(e)=>setLogin({...login,email:e.target.value})}/>
+      <input type="password" onChange={(e)=>setLogin({...login,password:e.target.value})}/>
+      <button onClick={handleLogin}>Login</button>
+    </>
+  );
+};
+
+12.Create a Register form using useState and store the user data in localStorage.
+const Register = () => {
+  const [user, setUser] = useState({ name: "", email: "", password: "" });
+
+  const handleSubmit = () => {
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    users.push(user);
+    localStorage.setItem("users", JSON.stringify(users));
+    alert("Registered Successfully");
+  };
+
+  return (
+    <>
+      <input placeholder="Name" onChange={(e)=>setUser({...user, name:e.target.value})}/>
+      <input placeholder="Email" onChange={(e)=>setUser({...user, email:e.target.value})}/>
+      <input type="password" placeholder="Password"
+        onChange={(e)=>setUser({...user, password:e.target.value})}/>
+      <button onClick={handleSubmit}>Register</button>
+    </>
+  );
+};
+
+13.Store multiple users in localStorage as an array of objects and display them using .map()
+const Users = () => {
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+
+  return (
+    <>
+      {users.map((user, index) => (
+        <p key={index}>{user.name} - {user.email}</p>
+      ))}
+    </>
+  );
+};
+
+14.Create Edit and Delete functionality for the stored users using array methods.
+const deleteUser = (index) => {
+  const users = JSON.parse(localStorage.getItem("users"));
+  users.splice(index, 1);
+  localStorage.setItem("users", JSON.stringify(users));
+};
+
+15.Protected Routerusing HOC
+const ProtectedRoute = (Component) => {
+  return () => {
+    const isLogin = localStorage.getItem("isLogin");
+    return isLogin ? <Component /> : <Navigate to="/login" />;
+  };
+};
+const DashboardProtected = ProtectedRoute(Dashboard);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,162 @@
+🔹 What is useEffect in React?
+
+useEffect is a React Hook used to handle side effects in functional components.
+
+👉 Side effects are operations that affect something outside the component render.
+
+📌 Syntax:
+
+useEffect(() => {
+  // side effect code
+}, [dependencies])
+
+🔹 Why do we need useEffect?
+
+In React:
+
+useState → handles state
+
+useEffect → handles side effects
+
+Without useEffect, things like API calls, timers, subscriptions may run unnecessarily on every render, causing:
+❌ unwanted function calls
+❌ performance issues
+❌ infinite loops
+
+🔹 What are Side Effects?
+
+Side effects are operations that are not directly related to UI rendering:
+
+Examples of Side Effects:
+
+✅ API calls (fetch, axios)
+
+✅ Timers (setTimeout, setInterval)
+
+✅ DOM updates
+
+✅ Event listeners
+
+✅ Subscriptions (WebSocket, Firebase)
+
+✅ LocalStorage access
+
+🔹 Prevent Unwanted Function Calls
+
+If you call an API directly inside the component:
+
+fetchData(); // ❌ runs on every render
+
+
+👉 React re-renders → function runs again → unwanted calls
+
+✔ Solution → wrap it inside useEffect
+
+🔹 useEffect Dependency Array
+1️⃣ No dependency array
+useEffect(() => {
+  console.log("Runs on every render");
+});
+
+
+🟡 Runs after every render
+
+2️⃣ Empty dependency array []
+useEffect(() => {
+  console.log("Runs only once");
+}, []);
+
+
+🟢 Runs only once (component mount)
+
+✔ Best for:
+
+API calls
+
+Initial setup
+
+Subscriptions
+
+3️⃣ With dependencies
+useEffect(() => {
+  console.log("Runs when count changes");
+}, [count]);
+
+
+🔵 Runs only when count changes
+
+✔ Used for:
+
+Watching state/props
+
+Conditional side effects
+
+🔹 API Call using useEffect
+useEffect(() => {
+  fetch("https://api.example.com/data")
+    .then(res => res.json())
+    .then(data => setData(data));
+}, []);
+
+
+✔ Prevents multiple API calls
+✔ Runs once on component load
+
+🔹 Timer Start & Stop (Cleanup)
+useEffect(() => {
+  const timer = setInterval(() => {
+    console.log("Timer running");
+  }, 1000);
+
+  return () => {
+    clearInterval(timer);
+  };
+}, []);
+
+
+📌 Cleanup function:
+
+Stops timers
+
+Removes subscriptions
+
+Prevents memory leaks
+
+🔹 DOM Updates using useEffect
+useEffect(() => {
+  document.title = `Count: ${count}`;
+}, [count]);
+
+
+✔ Updates DOM only when count changes
+
+🔹 Subscriptions Example
+useEffect(() => {
+  window.addEventListener("resize", handleResize);
+
+  return () => {
+    window.removeEventListener("resize", handleResize);
+  };
+}, []);
+
+
+✔ Adds subscription on mount
+✔ Removes on unmount
+
+🔹 useState vs useEffect
+Hook	Purpose
+useState	Manage state
+useEffect	Handle side effects
+useState	Triggers re-render
+useEffect	Runs after render
+🔹 Key Interview Points ⭐
+
+✔ useEffect runs after render
+✔ Prevents unwanted function calls
+✔ Used for API calls, timers, DOM updates, subscriptions
+✔ Cleanup function prevents memory leaks
+✔ Dependency array controls when effect runs
+
+🔹 One-Line Definition (Interview Gold ✨)
+
+useEffect is a React Hook used to handle side effects in functional components and control unwanted executions during re-renders.

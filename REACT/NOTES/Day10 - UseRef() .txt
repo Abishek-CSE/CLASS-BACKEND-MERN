@@ -1,0 +1,31 @@
+useRef with multiple sections (scroll / move to section) — Notes
+useRef is a React Hook that gives direct access to a DOM element. When you attach a ref to an element using ref={myRef}, React stores that real DOM node inside myRef.current. This allows you to perform DOM actions like scroll, focus, text change, and style change without depending on state or re-rendering the component.
+
+In multi-section pages (like landing pages with Home, About, Services, Contact), we often need to move the view to a particular section when a button or navbar link is clicked. This is a perfect real-world use case for useRef. Each section is connected to its own ref, so React can directly know the exact DOM position of that section.
+
+To move to a section, we use the DOM method scrollIntoView(). By calling sectionRef.current.scrollIntoView({ behavior: "smooth" }), the page automatically scrolls to that section with a smooth animation. This gives a better user experience and avoids manual scrolling by the user.
+
+When there are multiple sections, we create multiple refs (for example, sec1Ref, sec2Ref, sec3Ref, sec4Ref). Instead of writing separate functions for each section, we can create one common function that accepts a ref as a parameter and performs the scroll. This makes the code clean, reusable, and easy to maintain.
+
+This concept also shows the real difference between state and ref. State is used when UI updates are required after data changes. Ref is used when we want to directly control or access DOM elements without causing a re-render. Scrolling to sections is a DOM action, so useRef is the correct and efficient choice.
+
+In summary, using useRef for section navigation is a common pattern in modern React applications. It helps in building smooth navigation systems, improves user experience, and keeps the code simple by directly interacting with the DOM elements through references.
+
+
+myRef.current.innerText
+myRef.current.value
+myRef.current.style.color = "red"
+myRef.current.focus()
+myRef.current.scrollIntoView()
+useRef is a React Hook used to create a reference to a DOM element or to store a mutable value that persists across renders. It returns an object with a single property called .current. This .current holds either the DOM element or the stored value.
+
+When we attach a ref to an element using ref={myRef}, React assigns the actual DOM node to myRef.current after the component mounts. This allows us to directly access and manipulate the element without using state.
+
+A key point about useRef is that updating the value inside .current does not trigger a re-render. That is why useRef is not used for UI data. Instead, it is used for DOM operations like focusing an input, changing text, changing styles, scrolling to a section, or reading element content.
+
+useRef is also helpful to store values between renders, such as previous state values, timers, counters, or flags. Since it does not cause re-renders, it acts like a memory container inside the component.
+
+In simple terms, state is used to control what appears on the screen, while ref is used to access or control the DOM directly and to store non-UI values safely across renders.
+
+Because of this behavior, useRef is widely used in forms (uncontrolled components), auto-focus features, scroll navigation, animations, and performance optimizations where re-rendering is not needed.
+

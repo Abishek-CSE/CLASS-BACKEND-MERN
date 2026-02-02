@@ -1,0 +1,117 @@
+useContext – Notes (React Hook)
+✅ What is useContext?
+
+useContext is a React Hook used to handle global state management.
+It allows you to share data across multiple components without passing props manually at every level (avoids prop drilling).
+
+✅ Why use useContext?
+
+Share data globally (app-level)
+
+Avoid props drilling
+
+Centralized data management
+
+Cleaner and more maintainable code
+
+✅ Where is useContext used?
+
+Theme (dark/light)
+
+User authentication data
+
+Language settings
+
+Global counters / settings
+
+App-wide configuration
+
+🔹 Key Concepts in useContext
+1️⃣ Create Context
+
+Create a main context container
+
+Done using createContext()
+
+2️⃣ Provider
+
+Provides (shares) data to components
+
+Wraps the components that need access
+
+Holds the main/global data
+
+3️⃣ Consumer (Receiver)
+
+Any component that uses the data
+
+Accessed using useContext(ContextName)
+
+🔹 Flow of useContext
+Create Context
+     ↓
+Wrap App with Provider
+     ↓
+Pass data through value
+     ↓
+Consume data anywhere using useContext
+🔹 Simple Example
+📁 context/AppContext.js
+import { createContext } from "react";
+
+
+export const AppContext = createContext();
+📁 App.jsx (Provider)
+import { AppContext } from "./context/AppContext";
+import Home from "./Home";
+
+
+function App() {
+  const user = "Abishek";
+
+
+  return (
+    <AppContext.Provider value={user}>
+      <Home />
+    </AppContext.Provider>
+  );
+}
+
+
+export default App;
+📁 Home.jsx (Receiver)
+import { useContext } from "react";
+import { AppContext } from "./context/AppContext";
+
+
+const Home = () => {
+  const user = useContext(AppContext);
+
+
+  return <h1>Hello {user}</h1>;
+};
+
+
+export default Home;
+🔹 Important Points (Interview ⭐)
+
+useContext is used inside functional components only
+
+When Provider value changes, all consuming components re-render
+
+Best for small to medium global state
+
+Not a full replacement for Redux (no middleware, no time travel)
+
+🔹 Advantages
+
+✔ No prop drilling
+✔ Easy to implement
+✔ Centralized data
+✔ Clean component structure
+
+🔹 Limitations
+
+❌ Re-renders all consumers
+❌ Not ideal for very large or complex state
+❌ No built-in debugging tools

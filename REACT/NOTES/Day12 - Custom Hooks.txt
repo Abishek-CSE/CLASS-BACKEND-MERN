@@ -1,0 +1,6 @@
+A Custom Hook in React is a reusable JavaScript function whose name starts with use. It allows us to extract component logic into a reusable function. Whenever multiple components need the same logic (like fetching data, handling search, filtering, sorting), instead of repeating code, we place that logic inside a custom hook and reuse it.
+
+Custom hooks use existing React hooks like useState, useEffect, useMemo, etc., internally. They help keep components clean, readable, and maintainable. In real projects, developers create hooks like useFetch, useAuth, useDebounce, and useSearch.
+
+From an interview point of view, custom hooks show that you understand code reusability, separation of concerns, and React architecture.
+

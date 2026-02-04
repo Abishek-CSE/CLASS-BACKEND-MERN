@@ -1,0 +1,123 @@
+1️⃣ How do you fetch products from an API using useEffect with async/await?
+
+You use useEffect to run the API call after the component mounts.
+
+Since useEffect itself cannot be async, you define an async function inside it and call it.
+
+useEffect(() => {
+  const fetchProducts = async () => {
+    const res = await fetch("https://api.com/products");
+    const data = await res.json();
+    setProducts(data);
+  };
+
+
+  fetchProducts();
+}, []);
+2️⃣ What is a controlled <select> in React?
+
+A controlled <select> is one where:
+
+The selected value comes from React state
+
+Changes are handled using onChange
+
+<select value={category} onChange={(e) => setCategory(e.target.value)}>
+  <option value="all">All</option>
+</select>
+
+➡️ React fully controls the dropdown value.
+
+3️⃣ Why do we keep the selected category in state?
+
+To remember the user’s selection
+
+To re-filter products when the category changes
+
+To trigger automatic re-rendering
+
+Without state, React wouldn’t know the selection changed.
+
+4️⃣ Why is a default value like "all" used in the dropdown?
+
+To show all products initially
+
+To avoid empty UI on first load
+
+To give users a clear “no filter” option
+
+const [category, setCategory] = useState("all");
+5️⃣ How do you filter products based on the selected category?
+
+Use .filter() on the products array
+
+If category is "all", return everything
+
+const filteredProducts =
+  category === "all"
+    ? products
+    : products.filter(p => p.category === category);
+6️⃣ What is derived data, and where do you compute it?
+
+Derived data is data calculated from existing state
+
+Example: filtered products from products + category
+
+📌 It should be computed:
+
+Inside the component
+
+During render (not stored in state)
+
+const filteredProducts = ...
+7️⃣ Why shouldn’t you modify the original products array while filtering?
+
+React relies on immutability
+
+Modifying original data:
+
+Breaks re-renders
+
+Causes bugs
+
+Loses original data
+
+❌ Wrong:
+
+products.splice(...)
+
+✅ Correct:
+
+products.filter(...)
+8️⃣ How does React know to re-render when the category changes?
+
+setCategory() updates state
+
+State change → React triggers re-render
+
+Component re-runs → filtered data updates automatically
+
+➡️ This is React’s reactivity system.
+
+9️⃣ How do you render <option> elements dynamically from API data?
+
+Fetch categories from API
+
+Use .map() to render options
+
+{categories.map(cat => (
+  <option key={cat} value={cat}>
+    {cat}
+  </option>
+))}
+🔟 How do you handle “No products found” after filtering?
+
+Check filtered array length
+
+Show a message conditionally
+
+{filteredProducts.length === 0 ? (
+  <p>No products found</p>
+) : (
+  filteredProducts.map(p => <Product key={p.id} {...p} />)
+)}

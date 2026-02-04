@@ -1,0 +1,17 @@
+Custom Hooks - React Functions
+
+A Custom Hook is a normal JavaScript function whose name starts with use. It allows us to reuse logic across multiple components. Instead of writing the same useEffect, useState, and processing code again and again, we move that logic into a custom hook.
+Custom hooks improve code reusability, readability, and separation of concerns. The component focuses only on UI, while the hook handles logic like fetching data, removing duplicates, filtering, or sorting.
+
+In real-world React projects, developers commonly create hooks like useFetch, useAuth, useSearch, and useFilter. This shows clean architecture and is a strong positive in interviews.
+
+In this lesson, we build three hooks:
+
+useFetch → API call using async/await
+
+useCategories → remove duplicate categories
+
+useFilterByCategory → filter products by dropdown
+
+This pattern mirrors production apps where business logic is separated from presentation.
+

@@ -18,13 +18,9 @@ const App = () => {
   const handleclick = () => {
     setIncrement(increment + 1)
   }
-
-  // store input text
   const handleInput = (e) => {
     setSave(e.target.value)
   }
-
-  // button click triggers search
   const handleSearch = () => {
     setSearch(save)
   }
@@ -59,8 +55,9 @@ const App = () => {
           Cart {increment}
         </button>
       </div>
-      <div className='bg-pink-800 text-center p-3'>
-    <select required className='bg-pink-300'>
+      <div className='bg-amber-800 text-center p-3'>
+    <select required className='bg-amber
+    -300'>
       <option  selected disabled >Select Your Product</option>
       {categories.map((e,i)=>(
         <option key={i+1} value={i+1}>

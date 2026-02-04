@@ -1,0 +1,172 @@
+1. What is the purpose of useEffect in React?
+
+useEffect is used to handle side effects in a React component.
+
+Side effects are things that happen outside rendering:
+
+API calls
+
+Subscriptions (WebSocket, events)
+
+Timers (setInterval, setTimeout)
+
+DOM manipulation
+
+Syncing state with external systems
+
+useEffect(() => {
+  fetchUsers();
+}, []);
+
+➡️ Runs after render, not during render.
+
+2. What problem does useMemo solve?
+
+useMemo optimizes expensive calculations by memoizing the result.
+
+Without it:
+
+Heavy calculations run on every render
+
+Even when inputs haven’t changed
+
+const filteredUsers = useMemo(() => {
+  return users.filter(u => u.isActive);
+}, [users]);
+
+➡️ Prevents unnecessary recalculations.
+
+3. Why do we use useCallback in React?
+
+useCallback memoizes a function reference.
+
+Problem it solves:
+
+Functions are recreated on every render
+
+Causes unnecessary re-renders of child components
+
+const handleClick = useCallback(() => {
+  setCount(c => c + 1);
+}, []);
+
+➡️ Keeps the same function reference unless dependencies change.
+
+4. Difference between useEffect and useMemo
+Aspect	useEffect	useMemo
+Purpose	Side effects	Performance optimization
+Runs	After render	During render
+Returns	Nothing (optional cleanup)	Memoized value
+Use case	API calls, subscriptions	Heavy calculations
+5. Difference between useMemo and useCallback
+Aspect	useMemo	useCallback
+Memoizes	Value	Function
+Returns	Computed result	Function reference
+Syntax	useMemo(() => value, deps)	useCallback(() => fn, deps)
+
+👉 Internally:
+
+useCallback(fn, deps) === useMemo(() => fn, deps)
+6. What happens if you don’t provide a dependency array?
+useEffect
+useEffect(() => {
+  console.log("Runs every render");
+});
+
+➡️ Runs after every render
+
+useMemo / useCallback
+useMemo(() => compute(), undefined);
+
+➡️ Recomputes on every render
+❌ No optimization benefit
+
+7. When does useMemo recompute its value?
+
+useMemo recomputes when:
+
+Component re-renders AND
+
+One of the dependencies changes
+
+useMemo(() => expensiveCalc(a, b), [a, b]);
+
+➡️ Recomputes only if a or b changes.
+
+8. How does useCallback prevent unnecessary child re-renders?
+
+React compares props by reference.
+
+Without useCallback:
+
+<Child onClick={() => doSomething()} />
+
+➡️ New function every render → child re-renders
+
+With useCallback:
+
+const handleClick = useCallback(() => doSomething(), []);
+<Child onClick={handleClick} />
+
+➡️ Same function reference → child does not re-render (with React.memo).
+
+9. Can we perform API calls inside useMemo or useCallback? Why?
+
+❌ No, we should NOT
+
+Reasons:
+
+They run during render
+
+Must be pure
+
+Side effects can cause bugs and infinite loops
+
+✅ API calls belong in:
+
+useEffect(() => {
+  fetchData();
+}, []);
+10. Real-time scenario using useEffect, useMemo, and useCallback together
+Example: Product List Page
+const ProductPage = () => {
+  const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState("");
+
+
+  // 1️⃣ API call
+  useEffect(() => {
+    fetch("/api/products")
+      .then(res => res.json())
+      .then(setProducts);
+  }, []);
+
+
+  // 2️⃣ Expensive filtering
+  const filteredProducts = useMemo(() => {
+    return products.filter(p =>
+      p.name.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [products, search]);
+
+
+  // 3️⃣ Stable function for child component
+  const handleSearch = useCallback((value) => {
+    setSearch(value);
+  }, []);
+
+
+  return (
+    <>
+      <SearchBox onSearch={handleSearch} />
+      <ProductList products={filteredProducts} />
+    </>
+  );
+};
+What each hook does:
+
+useEffect → fetch products
+
+useMemo → avoid re-filtering on every render
+
+useCallback → prevent SearchBox re-renders

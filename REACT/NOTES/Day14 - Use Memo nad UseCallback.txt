@@ -1,0 +1,230 @@
+🔍 Why useMemo and useCallback exist
+
+In React:
+
+Every state change → component re-renders
+
+Every re-render →
+
+functions are recreated
+
+calculations re-run
+
+child components may re-render unnecessarily
+
+👉 These hooks optimize performance, not logic.
+
+🧠 useMemo — Memoizing a VALUE
+What it does
+
+useMemo stores (caches) the result of a calculation
+React will reuse the cached value until dependencies change.
+
+Syntax
+const memoizedValue = useMemo(() => {
+  return computeSomething();
+}, [dependencies]);
+
+🔬 What happens internally
+
+First render → function runs → value stored
+
+Next render:
+
+dependencies same → return stored value
+
+dependencies changed → recompute
+
+✅ When to use useMemo
+
+✔ Heavy calculations
+✔ Filtering large arrays
+✔ Sorting data
+✔ Derived state
+
+❌ Simple calculations (a + b)
+❌ Premature optimization
+
+🧪 Example 1: Expensive calculation
+import { useState, useMemo } from "react";
+
+function slowFunction(num) {
+  console.log("Heavy calculation...");
+  for (let i = 0; i < 1e9; i++) {}
+  return num * 2;
+}
+
+export default function App() {
+  const [number, setNumber] = useState(2);
+  const [count, setCount] = useState(0);
+
+  const doubled = useMemo(() => {
+    return slowFunction(number);
+  }, [number]);
+
+  return (
+    <>
+      <h2>Doubled: {doubled}</h2>
+
+      <button onClick={() => setNumber(number + 1)}>
+        Change Number
+      </button>
+
+      <button onClick={() => setCount(count + 1)}>
+        Re-render ({count})
+      </button>
+    </>
+  );
+}
+
+🔥 Result
+
+Clicking Re-render → ❌ slow function NOT called
+
+Clicking Change Number → ✅ slow function runs
+
+🧠 Think of useMemo as:
+
+“Only recalculate when necessary”
+
+🧠 useCallback — Memoizing a FUNCTION
+What it does
+
+useCallback returns the same function reference between renders.
+
+Syntax
+const memoizedFn = useCallback(() => {
+  doSomething();
+}, [dependencies]);
+
+
+⚠️ Functions are objects in JS → new reference every render.
+
+🔬 Why function identity matters
+() => {} !== () => {}
+
+
+Even if logic is same → reference is different
+
+✅ When to use useCallback
+
+✔ Passing functions to child components
+✔ With React.memo
+✔ Event handlers used frequently
+✔ Prevent unnecessary child re-renders
+
+❌ If function is not passed to child
+❌ If no performance issue
+
+🧪 Example 2: Child re-render problem
+❌ Without useCallback
+const Child = React.memo(({ onClick }) => {
+  console.log("Child rendered");
+  return <button onClick={onClick}>Child</button>;
+});
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  const handleClick = () => {
+    console.log("Clicked");
+  };
+
+  return (
+    <>
+      <Child onClick={handleClick} />
+      <button onClick={() => setCount(count + 1)}>
+        Parent ({count})
+      </button>
+    </>
+  );
+}
+
+
+🔴 Child renders every time parent updates.
+
+✅ With useCallback
+const handleClick = useCallback(() => {
+  console.log("Clicked");
+}, []);
+
+
+🟢 Child renders only once
+
+🧠 Think of useCallback as:
+
+“Keep the same function unless dependencies change”
+
+⚔️ useMemo vs useCallback
+Feature	useMemo	useCallback
+Caches	Value	Function
+Returns	Result	Function
+Use case	Expensive computation	Stable function reference
+Typical use	Filtering, sorting	Event handlers
+Prevents	Recalculation	Re-render
+🧩 Important relationship
+useCallback(fn, deps) === useMemo(() => fn, deps)
+
+
+⚠️ But useCallback is clearer and recommended.
+
+🚨 Dependency Array Rules (CRITICAL)
+❌ Wrong
+useCallback(() => {
+  console.log(count);
+}, []);
+
+✅ Correct
+useCallback(() => {
+  console.log(count);
+}, [count]);
+
+
+If you miss dependencies → stale data bug
+
+🧠 When NOT to use these hooks
+
+Small apps
+
+No performance issue
+
+Simple components
+
+Overusing causes:
+
+harder code
+
+more memory usage
+
+👉 Measure first, optimize second
+
+🎯 Interview Gold Answers
+
+Q: Why use useMemo?
+
+To avoid expensive recalculations on every render.
+
+Q: Why use useCallback?
+
+To prevent unnecessary child re-renders by memoizing functions.
+
+Q: Are they required?
+
+No, they’re performance optimizations.
+
+Q: Can we do API calls inside useMemo/useCallback?
+❌ No — side effects belong in useEffect.
+
+🧪 Real-World Examples
+
+Search filters
+
+Product sorting
+
+Dashboard analytics
+
+Charts
+
+Large lists
+
+Memoized handlers in forms

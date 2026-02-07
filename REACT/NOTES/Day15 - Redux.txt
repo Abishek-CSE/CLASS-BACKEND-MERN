@@ -1,0 +1,90 @@
+🗣️ Redux — 5 Paras (Human explanation)
+Redux is like a central godown (warehouse) for your app data. Instead of every component keeping its own small data, all important data stays in one place called the store. Any component can go and take what it needs from there.
+
+In normal React, when data has to travel from a parent to deep child components, we pass props again and again. This becomes messy. Redux removes this headache by allowing any component to directly access the store without depending on parents.
+
+Redux works on a very strict rule: You cannot change the data directly. If you want to change something, you must send an action. That action goes to a reducer, and the reducer decides how the state should change.
+
+Because of this strict pattern, Redux state changes are very predictable. That’s why Redux is loved in large applications like e-commerce, dashboards, admin panels, and banking apps where data flow must be controlled.
+
+Redux also makes debugging easy. You can track what action changed what data. This is very powerful in real-world big projects.
+
+
+🧱 Core Things You Learn in Redux
+Concept
+Meaning
+Store
+Central place where data lives
+Action
+Object that tells what to do
+Reducer
+Function that updates state
+Dispatch
+Method to send action
+Subscribe
+Listen to store changes
+Provider
+Makes store available to React
+useSelector
+Read data from store
+useDispatch
+Send action from component
+
+🛠️ Important Libraries
+redux — core redux
+
+react-redux — connect redux to React
+
+@reduxjs/toolkit — modern, easy redux (recommended)
+
+
+🧩 Important Methods & What They Do
+Method
+From
+What it does
+createStore()
+redux
+Creates the store
+combineReducers()
+redux
+Combines multiple reducers
+dispatch()
+store
+Sends action to reducer
+getState()
+store
+Gets current state
+subscribe()
+store
+Listens to changes
+<Provider>
+react-redux
+Wraps app to give store access
+useSelector()
+react-redux
+Read data from store
+useDispatch()
+react-redux
+Dispatch action from component
+createSlice()
+toolkit
+Creates reducer + actions together
+configureStore()
+toolkit
+Creates store easily
+
+🔄 Full Redux Process (Step by Step)
+Create reducer
+
+Create store
+
+Wrap app with Provider
+
+Use useSelector to read data
+
+Use useDispatch to send action
+
+Reducer updates store
+
+UI auto re-renders
+

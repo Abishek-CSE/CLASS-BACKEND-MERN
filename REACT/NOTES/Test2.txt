@@ -1,0 +1,261 @@
+1️⃣ What is React? Why is it called a library and not a framework?
+
+React is a JavaScript library used to build user interfaces, especially single-page applications.
+
+Why library, not framework?
+
+React focuses only on the UI layer
+
+It doesn’t force rules for:
+
+Routing
+
+State management
+
+Data fetching
+
+You choose your own tools (React Router, Redux, Axios, etc.)
+
+➡️ Frameworks (like Angular) give a full structure
+➡️ React gives flexibility → that’s why it’s a library
+
+2️⃣ What is Virtual DOM? How is it different from Real DOM?
+
+Virtual DOM
+
+A lightweight JavaScript copy of the Real DOM
+
+React updates this first
+
+Compares changes using diffing algorithm
+
+Updates only the changed parts in Real DOM
+
+Real DOM
+
+Actual browser DOM
+
+Direct manipulation is slow
+
+Re-renders entire UI on changes
+
+Difference
+Virtual DOM	Real DOM
+Fast updates	Slower
+JS object	Browser structure
+Updates selectively	Re-renders more
+Better performance	Performance heavy
+3️⃣ What are components in React?
+Difference between Functional and Class Components?
+
+Components
+
+Reusable UI blocks
+
+Each component manages its own logic & UI
+
+Functional Components
+
+JavaScript functions
+
+Use Hooks
+
+Simpler & preferred
+
+function Hello() {
+  return <h1>Hello</h1>;
+}
+
+Class Components
+
+ES6 classes
+
+Use lifecycle methods
+
+More complex
+
+class Hello extends React.Component {
+  render() {
+    return <h1>Hello</h1>;
+  }
+}
+
+Key Differences
+Functional	Class
+Uses Hooks	Uses lifecycle methods
+Less code	More boilerplate
+Easier to read	Harder
+Recommended	Legacy
+4️⃣ What are Hooks? Why were Hooks introduced?
+
+Hooks
+
+Special functions that let you use state & lifecycle features in functional components
+
+Examples:
+
+useState
+
+useEffect
+
+useRef
+
+Why introduced?
+
+Avoid complex class components
+
+Reuse logic easily
+
+Cleaner & readable code
+
+➡️ Hooks made functional components powerful
+
+5️⃣ Difference between useState and useReducer?
+When to use which?
+useState
+
+Simple state
+
+Few values
+
+Easy updates
+
+const [count, setCount] = useState(0);
+
+useReducer
+
+Complex state logic
+
+Multiple actions
+
+Similar to Redux
+
+const [state, dispatch] = useReducer(reducer, initialState);
+
+Comparison
+useState	useReducer
+Simple logic	Complex logic
+Direct update	Action-based
+Small apps	Large apps
+Easy	More structured
+
+➡️ Use useReducer when state depends on previous state & multiple actions
+
+6️⃣ What is Prop Drilling? How can it be avoided?
+
+Prop Drilling
+
+Passing props through multiple components unnecessarily
+
+Example:
+
+App → A → B → C
+
+
+Problems
+
+Hard to manage
+
+Less readable
+
+How to Avoid
+
+Context API
+
+Redux / Zustand
+
+Component composition
+
+➡️ Best solution: Context API for medium apps
+
+7️⃣ What is Lazy Loading in React? Why is it important?
+
+Lazy Loading
+
+Load components only when needed
+
+Uses React.lazy() & Suspense
+
+const About = React.lazy(() => import('./About'));
+
+
+Why important?
+
+Reduces initial bundle size
+
+Faster page load
+
+Better performance
+
+➡️ Essential for large apps
+
+8️⃣ Purpose of useEffect & Dependency Array behavior
+
+useEffect
+
+Handles side effects
+
+API calls
+
+DOM updates
+
+Subscriptions
+
+Timers
+
+useEffect(() => {
+  // side effect
+}, []);
+
+Dependency Array Behavior
+Dependency	When it runs
+No array	Every render
+[]	Once (on mount)
+[value]	When value changes
+
+➡️ Controls when effect runs
+
+9️⃣ Difference between useRef and useState
+useState
+
+Triggers re-render on update
+
+Used for UI data
+
+useRef
+
+Does not trigger re-render
+
+Stores mutable values
+
+Access DOM elements
+
+const inputRef = useRef();
+
+Comparison
+useState	useRef
+Causes re-render	No re-render
+UI data	DOM / mutable values
+Async updates	Sync
+🔟 Role of Keys in React Lists
+
+Keys
+
+Unique identifier for list items
+
+Helps React track changes efficiently
+
+items.map(item => (
+  <li key={item.id}>{item.name}</li>
+))
+
+
+Why important?
+
+Improves performance
+
+Prevents wrong UI updates
+
+Helps React’s diffing algorithm
+
+➡️ Never use index as key (unless list is static)

@@ -1,0 +1,168 @@
+React
+1. What are all the hooks you know?
+
+React Hooks are special functions that let us use state and other React features in functional components.
+
+Commonly used hooks:
+
+useState – to manage state
+
+useEffect – to handle side effects (API calls, lifecycle)
+
+useContext – to use context data
+
+useRef – to access DOM elements or persist values
+
+useMemo – to optimize performance by memoizing values
+
+useCallback – to memoize functions
+
+useReducer – to manage complex state logic
+
+useLayoutEffect – runs before browser paint
+
+useImperativeHandle – customizes ref behavior
+
+2. Use of Frontend
+
+The frontend is the user interface of a web application.
+
+Uses:
+
+Displays content to users
+
+Handles user interactions (clicks, forms, inputs)
+
+Sends requests to backend APIs
+
+Shows data received from backend
+
+Improves user experience (UI/UX)
+
+Examples: React, HTML, CSS, JavaScript
+
+3. Difference between React and JavaScript
+React	JavaScript
+React is a library	JavaScript is a programming language
+Used for building UI	Used for logic and functionality
+Component-based	Not component-based
+Uses Virtual DOM	Uses Real DOM
+Faster UI updates	Slower DOM manipulation
+4. What is CSR?
+
+CSR (Client-Side Rendering) means the browser loads a minimal HTML file and JavaScript renders the content on the client side.
+
+Features:
+
+Rendering happens in the browser
+
+Faster page transitions
+
+Used by React, Vue, Angular
+
+Initial load may be slower
+
+5. How do you pass data to the backend?
+
+Data is passed to the backend using:
+
+HTTP methods like:
+
+GET
+
+POST
+
+PUT
+
+DELETE
+
+Fetch API or Axios
+
+Data formats:
+
+JSON
+
+Form Data
+
+Example: Sending form data using POST request
+
+Node.js
+1. What is Node?
+
+Node.js is a JavaScript runtime environment that allows JavaScript to run outside the browser.
+
+Uses:
+
+Build backend servers
+
+Handle APIs
+
+Work with databases
+
+Create real-time applications
+
+2. What are all the imported modules in Node?
+
+Node has built-in modules and external modules.
+
+Built-in modules:
+
+http
+
+fs (File System)
+
+path
+
+os
+
+url
+
+events
+
+External modules:
+
+express
+
+mongoose
+
+dotenv
+
+cors
+
+nodemon
+
+3. Difference between Node and JavaScript
+Node.js	JavaScript
+Runtime environment	Programming language
+Runs on server	Runs in browser
+Can access file system	Cannot access file system
+Used for backend	Used for frontend
+4. What is a server?
+
+A server is a system that:
+
+Receives requests from clients
+
+Processes the request
+
+Sends responses back
+
+Example:
+
+Client → Request → Server → Response
+
+5. What is backend process in Node?
+
+Backend process in Node includes:
+
+Receiving client requests
+
+Handling routes
+
+Processing business logic
+
+Connecting to databases
+
+Sending response to frontend
+
+Managing authentication and security

@@ -1,0 +1,20 @@
+React -
+
+Node - build in than HTTP
+import export     -
+
+Export :
+Named Export
+export const app = ()=>{
+
+}
+
+export default app1
+import - app1,{app,gdfjg,sdfhgsdfsdhsdf}
+
+require
+
+ES6+  - Feautures
+Backend
+Server set up HTTP
+FS - file system

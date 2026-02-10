@@ -1,0 +1,16 @@
+
+HTTP - set the server
+file system - fs
+Path system - path
+os system - os
+
+process - env
+
+crypto
+events
+
+
+Type of Node modules -
+1. built-in Modules (come with node)
+2. User-Definded Modules(We build)
+3. thired part modules - express dotenv cors mongoose  bcrypt jwt multer

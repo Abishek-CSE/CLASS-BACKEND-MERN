@@ -1,0 +1,125 @@
+1. Set the server and show console (http://localhost:5000)
+Steps:
+
+Create a file: server.js
+
+Use http module
+
+Run using node server.js
+
+Code:
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+  res.write("Server is running");
+  res.end();
+});
+
+server.listen(5000, () => {
+  console.log("Server running at http://localhost:5000");
+});
+
+Output:
+Server running at http://localhost:5000
+
+
+👉 Open browser → http://localhost:5000
+
+2. What is HTTP module & why we use it?
+HTTP Module:
+
+A built-in Node.js module
+
+Used to create servers
+
+Handles request and response
+
+Why we use it:
+
+To create a web server
+
+To handle GET / POST requests
+
+No need to install (comes with Node)
+
+Example use:
+const http = require("http");
+
+3. What are import & export methods?
+Import / Export:
+
+Used to share code between files
+
+Makes code reusable and clean
+
+Two types in Node:
+
+CommonJS (default)
+
+require()
+
+module.exports
+
+ES Modules
+
+import
+
+export
+
+4. Using import & export to add 2 numbers
+
+(app.js and add.js)
+
+📁 add.js
+function add(a, b) {
+  return a + b;
+}
+
+module.exports = add;
+
+📁 app.js
+const add = require("./add");
+
+const result = add(10, 20);
+console.log("Sum:", result);
+
+Output:
+Sum: 30
+
+
+✅ This is CommonJS method (most used in Node)
+
+5. What is the machine & runtime environment in Node?
+Machine:
+
+Your computer system
+
+Includes:
+
+CPU
+
+Memory
+
+OS (Windows / Linux / Mac)
+
+Runtime Environment:
+
+👉 Node.js is a runtime environment
+
+What it means:
+
+It allows JavaScript to run outside the browser
+
+Converts JS code → machine-understandable code
+
+Node Runtime includes:
+
+V8 JavaScript Engine
+
+Event Loop
+
+Built-in modules (http, fs, path)
+
+Simple line:
+
+Node.js is a runtime environment that allows JavaScript to run on the server machine.

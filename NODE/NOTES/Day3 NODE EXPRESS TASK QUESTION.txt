@@ -1,0 +1,314 @@
+2. What is the difference between Node and Express?
+🔹 Node.js
+
+Node.js is a runtime environment
+
+It allows you to run JavaScript outside the browser
+
+Built on Chrome’s V8 engine
+
+Used to create servers, APIs, backend apps
+
+👉 Example:
+
+const http = require("http");
+
+http.createServer((req, res) => {
+  res.end("Hello");
+}).listen(3000);
+
+🔹 Express.js
+
+Express is a framework built on top of Node.js
+
+It makes building web servers and APIs easier
+
+Provides routing, middleware, request handling
+
+👉 Example:
+
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Hello");
+});
+
+app.listen(3000);
+
+✅ Difference Table
+Node.js	Express.js
+Runtime environment	Framework
+Runs JavaScript	Built on Node
+Basic server setup	Easy routing & middleware
+More manual work	Less code, more features
+
+👉 Node is the engine 🚗
+👉 Express is the smart steering + controls 🎯
+
+3. What is .env?
+
+.env file is used to store environment variables.
+
+It keeps:
+
+Port numbers
+
+Database URLs
+
+API keys
+
+Secret keys
+
+Example:
+
+PORT=5000
+DB_URL=mongodb://localhost:27017/test
+JWT_SECRET=mysupersecret
+
+
+In Node:
+
+require("dotenv").config();
+console.log(process.env.PORT);
+
+
+✅ Why use it?
+
+Security (don’t expose secrets)
+
+Easy configuration
+
+Different values for development/production
+
+4. What is listen()?
+
+app.listen() starts the server.
+
+It tells your application:
+👉 "Start listening for requests on this port"
+
+Example:
+
+app.listen(5000, () => {
+  console.log("Server running on port 5000");
+});
+
+
+Without listen(), your server won’t run.
+
+5. What is Express?
+
+Express is:
+
+A minimal and flexible Node.js web framework
+
+Used to build:
+
+Web servers
+
+REST APIs
+
+Backend applications
+
+Features:
+
+Routing
+
+Middleware
+
+JSON handling
+
+Error handling
+
+6. Why do we use Express?
+
+Without Express:
+
+We must manually handle routing
+
+Hard to manage large applications
+
+With Express:
+
+Easy routing (app.get, app.post)
+
+Middleware support
+
+Cleaner code
+
+Faster development
+
+Example:
+
+app.post("/login", (req, res) => {
+  res.json({ message: "Login successful" });
+});
+
+7. What is Nodemon?
+
+Nodemon is a development tool.
+
+It:
+
+Automatically restarts server
+
+When you change files
+
+Without nodemon:
+
+node index.js
+
+
+You must manually restart every time.
+
+With nodemon:
+
+nodemon index.js
+
+
+Server restarts automatically.
+
+✅ Used only in development.
+
+8. What is Port Number and Localhost?
+🔹 Port Number
+
+A port is a communication endpoint.
+
+Examples:
+
+3000
+
+5000
+
+8000
+
+Server runs on:
+
+http://localhost:5000
+
+🔹 Localhost
+
+localhost = your own computer.
+
+It means:
+
+127.0.0.1
+
+
+When you use:
+
+http://localhost:5000
+
+
+You are accessing your own system server.
+
+9. What is API?
+
+API = Application Programming Interface
+
+It allows:
+👉 Frontend to talk with backend
+
+Example:
+
+app.get("/users", (req, res) => {
+  res.json([{ name: "Abishek" }]);
+});
+
+
+Frontend fetch:
+
+fetch("http://localhost:5000/users")
+
+
+API returns data in:
+
+JSON format
+
+10. Flow of Express + Frontend Process
+
+Let’s understand full flow:
+
+Step 1: User opens React app
+
+Frontend runs on:
+
+http://localhost:3000
+
+Step 2: User clicks button
+
+Frontend sends request:
+
+fetch("http://localhost:5000/login")
+
+Step 3: Request reaches Express server
+
+Express handles route:
+
+app.post("/login", ...)
+
+Step 4: Server processes data
+
+Checks database
+
+Validates user
+
+Step 5: Server sends response
+res.json({ success: true });
+
+Step 6: Frontend receives response
+
+Frontend updates UI.
+
+🔄 Simple Flow Diagram:
+User → React Frontend → API Call → Express Server → Database
+Database → Express → JSON Response → React → UI Update
+
+11. What is package.json?
+
+package.json is the heart of a Node project.
+
+It contains:
+
+Project name
+
+Version
+
+Scripts
+
+Dependencies
+
+Dev dependencies
+
+Example:
+
+{
+  "name": "myapp",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "dotenv": "^16.0.0"
+  }
+}
+
+🔹 dependencies
+
+Used in production.
+Example:
+
+express
+
+mongoose
+
+🔹 devDependencies
+
+Used only in development.
+Example:
+
+nodemon

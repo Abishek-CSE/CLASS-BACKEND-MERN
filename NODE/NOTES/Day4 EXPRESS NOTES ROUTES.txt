@@ -1,0 +1,300 @@
+1️⃣ What is API?
+
+API (Application Programming Interface) is a way for two applications to communicate with each other.
+
+👉 In web development:
+
+Frontend (React) sends a request
+
+Backend (Node + Express) receives it
+
+Backend sends a response
+
+Example:
+
+Frontend → GET /users → Backend
+Backend → Sends user data (JSON)
+
+
+Example API:
+
+GET    /users
+POST   /login
+PUT    /profile
+DELETE /user/1
+
+2️⃣ What is Route Handling?
+
+Route handling means writing logic for specific URLs and HTTP methods.
+
+In Express.js, routes look like this:
+
+app.get("/users", (req, res) => {
+  res.send("All Users");
+});
+
+
+Here:
+
+GET → HTTP method
+
+/users → Route path
+
+Function → Route handler
+
+3️⃣ What is Route Mounting?
+
+Route mounting means connecting separate route files to the main server file.
+
+Instead of writing all routes in server.js, we separate them.
+
+Example:
+
+routes/userRoutes.js
+const express = require("express");
+const router = express.Router();
+
+router.get("/", (req, res) => {
+  res.send("User Route Working");
+});
+
+module.exports = router;
+
+server.js
+const userRoutes = require("./routes/userRoutes");
+
+app.use("/api/users", userRoutes);
+
+
+Now route becomes:
+
+http://localhost:5000/api/users
+
+
+This is called route mounting.
+
+4️⃣ What is CORS?
+
+CORS (Cross-Origin Resource Sharing) allows frontend and backend to communicate if they are running on different ports.
+
+Example:
+
+React → http://localhost:3000
+
+Node → http://localhost:5000
+
+Without CORS → Browser blocks request ❌
+
+Install CORS:
+
+npm install cors
+
+
+Use it:
+
+const cors = require("cors");
+app.use(cors());
+
+5️⃣ What is JSON Parse?
+JSON.parse()
+
+Converts JSON string → JavaScript object
+
+const data = '{"name":"Abi"}';
+const obj = JSON.parse(data);
+
+console.log(obj.name); // Abi
+
+JSON.stringify()
+
+Converts object → JSON string
+
+const obj = { name: "Abi" };
+const json = JSON.stringify(obj);
+
+6️⃣ Create Server + Route + Controller (MVC Structure)
+
+Let’s create proper structure 👇
+
+project/
+│
+├── server.js
+├── routes/
+│     └── userRoutes.js
+├── controllers/
+│     └── userController.js
+
+Step 1: Install Express
+npm init -y
+npm install express
+
+Step 2: server.js
+const express = require("express");
+const app = express();
+
+app.use(express.json()); // middleware to read JSON body
+
+const userRoutes = require("./routes/userRoutes");
+
+app.use("/api/users", userRoutes);
+
+const PORT = 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
+
+Step 3: routes/userRoutes.js
+const express = require("express");
+const router = express.Router();
+
+const { getUser, createUser } = require("../controllers/userController");
+
+router.get("/", getUser);
+router.post("/", createUser);
+
+module.exports = router;
+
+Step 4: controllers/userController.js
+exports.getUser = (req, res) => {
+  console.log(req.method);
+  console.log(req.url);
+  res.json({ message: "User fetched successfully" });
+};
+
+exports.createUser = (req, res) => {
+  console.log(req.body);  // checking request body
+  res.json({
+    message: "User created",
+    data: req.body
+  });
+};
+
+How to Check Request?
+
+Open Postman or browser:
+
+GET:
+http://localhost:5000/api/users
+
+POST:
+
+Body (JSON):
+
+{
+  "name": "Abishek",
+  "age": 22
+}
+
+
+You will see:
+
+req.method
+
+req.url
+
+req.body
+
+Microservice vs Monolithic
+Monolithic Architecture
+
+Single large project
+
+All features in one server
+
+Simple but hard to scale
+
+Microservice Architecture
+
+Project split into small services
+
+Example:
+
+Auth service
+
+Payment service
+
+Product service
+
+Each runs separately.
+
+MVC Pattern (Model View Controller)
+
+MVC = Structure pattern
+
+Part	Work
+Model	Database logic
+View	UI (Frontend)
+Controller	Logic between Model & View
+
+In Express:
+
+Routes → Connect request
+
+Controllers → Business logic
+
+Model → DB schema
+
+Express Framework
+
+Express.js is a minimal and flexible Node.js web framework used to build APIs and servers.
+
+Why use Express?
+
+Easy routing
+
+Middleware support
+
+Fast development
+
+Server – Port – Number
+
+Server = Program that listens to requests
+Port = Door number of server
+
+Example:
+
+http://localhost:5000
+
+
+localhost → Your computer
+
+5000 → Port number
+
+Middlewares
+
+Middleware = Function that runs between request & response
+
+Example:
+
+app.use((req, res, next) => {
+  console.log("Middleware running");
+  next();
+});
+
+
+Types:
+
+Built-in (express.json())
+
+Third-party (cors)
+
+Custom middleware
+
+Controllers Notes
+
+Controller:
+
+Contains business logic
+
+Handles request
+
+Sends response
+
+Example:
+
+exports.loginUser = (req, res) => {
+   // validate
+   // check DB
+   // send response
+};

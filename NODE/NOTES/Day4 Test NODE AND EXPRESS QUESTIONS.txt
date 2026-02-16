@@ -1,0 +1,334 @@
+🔥 NODE + EXPRESS – 15 INTERVIEW QUESTIONS
+1️⃣ Difference between Node.js and Express
+Node.js	Express.js
+Runtime environment	Framework
+Runs JavaScript on server	Helps build web servers easily
+Uses built-in HTTP module	Built on top of Node.js
+Complex routing	Simple routing
+Low-level	High-level
+Example (Node.js without Express)
+const http = require("http");
+
+http.createServer((req, res) => {
+   res.end("Hello");
+}).listen(3000);
+
+Example (Express)
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+   res.send("Hello");
+});
+
+
+Express makes development faster and easier.
+
+2️⃣ How routing works internally in Express
+
+Express uses a routing table.
+
+Flow:
+
+Client Request → Express Router → Match path + method → Execute handler → Send response
+
+Example:
+
+app.get("/user", handler)
+
+
+Express checks:
+
+Request method = GET
+
+Request path = /user
+
+Executes handler
+
+3️⃣ Purpose of express.json() middleware
+
+It converts JSON request body → JavaScript object
+
+Without it:
+
+req.body = undefined
+
+
+With it:
+
+app.use(express.json());
+
+
+Example:
+
+app.post("/user", (req, res) => {
+   console.log(req.body.name);
+});
+
+4️⃣ HTTP methods in REST APIs
+Method	Purpose	Example
+GET	Read data	Get users
+POST	Create data	Register user
+PUT	Update full data	Update user
+PATCH	Update partial data	Update email
+DELETE	Delete data	Delete user
+5️⃣ Difference between req.params, req.query, req.body
+Property	Source	Example
+params	URL path	/user/101
+query	URL query	?name=abi
+body	request body	JSON data
+
+Example:
+
+app.post("/user/:id", (req, res) => {
+
+ console.log(req.params.id);
+ console.log(req.query.role);
+ console.log(req.body.name);
+
+});
+
+6️⃣ Dynamic route in Express
+
+Dynamic route uses :
+
+Example:
+
+app.get("/user/:id", (req, res) => {
+   res.send(req.params.id);
+});
+
+
+URL:
+
+/user/101
+
+
+Output:
+
+101
+
+
+Use case:
+
+Get user by ID
+
+Update product
+
+7️⃣ Two routes with same path and method
+
+Example:
+
+app.get("/user", handler1);
+app.get("/user", handler2);
+
+
+Result:
+
+Only first handler runs.
+
+Unless using next()
+
+app.get("/user", (req,res,next)=>{
+ next();
+});
+
+8️⃣ Route mounting in Express
+
+Route mounting connects routes to main app.
+
+Example:
+
+userRoutes.js
+
+const router = require("express").Router();
+
+router.get("/", (req,res)=>{
+ res.send("Users");
+});
+
+module.exports = router;
+
+
+app.js
+
+app.use("/user", userRoutes);
+
+
+URL:
+
+/user
+
+9️⃣ What is middleware?
+
+Middleware is a function that runs between request and response.
+
+Structure:
+
+(req, res, next)
+
+
+Example:
+
+app.use((req,res,next)=>{
+ console.log("Middleware runs");
+ next();
+});
+
+
+Uses:
+
+Authentication
+
+Logging
+
+Validation
+
+🔟 Properties inside req object
+Property	Use
+req.body	body data
+req.params	URL params
+req.query	query
+req.headers	headers
+req.method	GET POST
+req.url	URL
+req.ip	client IP
+
+Example:
+
+console.log(req.method);
+
+11️⃣ Handle 404 errors
+app.use((req, res) => {
+   res.status(404).send("Page not found");
+});
+
+
+Must be last middleware.
+
+12️⃣ Difference between res.send() and res.json()
+res.send()	res.json()
+Sends any data	Sends JSON
+String, HTML, object	Only JSON
+Auto detects type	Converts to JSON
+
+Example:
+
+res.send("Hello");
+
+res.json({name:"Abi"});
+
+13️⃣ MVC pattern structure
+
+Structure:
+
+project
+│
+├── models
+├── views
+├── controllers
+├── routes
+└── app.js
+
+
+Example:
+
+Controller:
+
+exports.getUser = (req,res)=>{
+ res.send("User");
+};
+
+
+Route:
+
+router.get("/", getUser);
+
+14️⃣ Difference between PUT and PATCH
+PUT	PATCH
+Update full data	Update partial data
+Replaces entire resource	Updates only fields
+
+Example PUT:
+
+{
+ name:"Abi",
+ age:22
+}
+
+
+PATCH:
+
+{
+ age:23
+}
+
+15️⃣ Full request-response lifecycle
+
+Flow:
+
+Client sends request
+
+Express receives request
+
+Middleware runs
+
+Route matches
+
+Controller executes
+
+Response sent
+
+Example:
+
+Frontend:
+
+GET /user
+
+
+Backend:
+
+app.get("/user", (req,res)=>{
+ res.send("User data");
+});
+
+
+Response sent to client.
+
+🧪 1️⃣ Basic Express Server Setup
+const express = require("express");
+
+const app = express();
+
+app.listen(3000, () => {
+   console.log("Server started on port 3000");
+});
+
+
+Output:
+
+Server started on port 3000
+
+🧪 2️⃣ Create Simple GET Route
+const express = require("express");
+
+const app = express();
+
+app.get("/", (req, res) => {
+   res.send("Welcome to my server");
+});
+
+app.listen(3000, () => {
+   console.log("Server running on port 3000");
+});
+
+Output in Browser
+
+Open:
+
+http://localhost:3000
+
+
+Output:
+
+Welcome to my server

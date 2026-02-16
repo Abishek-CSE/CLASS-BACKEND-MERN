@@ -1,0 +1,226 @@
+2. What is Request Object?
+
+The Request Object (req) represents the HTTP request sent by the client to the server.
+
+It contains all information about the request, such as:
+
+Body data
+
+Headers
+
+URL parameters
+
+Query parameters
+
+Method (GET, POST, PUT, DELETE)
+
+Client info
+
+It is automatically provided by Express in route handlers.
+
+Syntax
+app.get("/user", (req, res) => {
+   console.log(req);
+});
+
+Example
+
+If client sends request:
+
+GET http://localhost:5000/user?name=abishek
+
+
+Server can access:
+
+app.get("/user", (req, res) => {
+   console.log(req.query.name); // abishek
+});
+
+3. What is the use of Body data? When we use?
+
+Body data (req.body) contains data sent from client inside request body.
+
+We use body when sending:
+
+Form data
+
+JSON data
+
+Login data
+
+Register data
+
+Create new record
+
+Mostly used with:
+
+POST
+
+PUT
+
+PATCH
+
+Example (Frontend sends JSON)
+{
+  "name": "Abishek",
+  "email": "abi@gmail.com"
+}
+
+Server
+app.post("/register", (req, res) => {
+   console.log(req.body.name);
+   console.log(req.body.email);
+});
+
+
+Output:
+
+Abishek
+abi@gmail.com
+
+4. What is the use of Headers data? When we use?
+
+Headers (req.headers) contain extra information about the request.
+
+Used for:
+
+Authentication tokens
+
+Content type
+
+Authorization
+
+Browser info
+
+Example Header
+Authorization: Bearer 123456789
+Content-Type: application/json
+
+Server
+app.get("/profile", (req, res) => {
+   console.log(req.headers.authorization);
+});
+
+
+Output:
+
+Bearer 123456789
+
+5. What is the use of Params data? When we use?
+
+Params (req.params) are used to get values from URL path.
+
+Used when accessing specific resource.
+
+Example:
+
+http://localhost:5000/user/101
+
+
+Here 101 is param.
+
+Server
+app.get("/user/:id", (req, res) => {
+   console.log(req.params.id);
+});
+
+
+Output:
+
+101
+
+
+Used for:
+
+Get user by ID
+
+Delete user
+
+Update user
+
+6. What is the use of Query data? When we use?
+
+Query (req.query) is used to get data from URL after ?
+
+Example:
+
+http://localhost:5000/search?name=abishek&age=22
+
+Server
+app.get("/search", (req, res) => {
+   console.log(req.query.name);
+   console.log(req.query.age);
+});
+
+
+Output:
+
+abishek
+22
+
+
+Used for:
+
+Search
+
+Filter
+
+Pagination
+
+7. What is Request Object? When we use?
+
+The Request Object (req) is used whenever client sends a request to server.
+
+We use it to access:
+
+Property	Use
+req.body	Get form / JSON data
+req.params	Get URL parameters
+req.query	Get query parameters
+req.headers	Get header info
+req.method	GET, POST, PUT
+req.url	URL path
+Complete Example
+const express = require("express");
+const app = express();
+
+app.use(express.json());
+
+app.post("/user/:id", (req, res) => {
+
+   console.log("Params:", req.params.id);
+   console.log("Query:", req.query.role);
+   console.log("Body:", req.body.name);
+   console.log("Headers:", req.headers.authorization);
+
+   res.send("Request received");
+});
+
+app.listen(5000, () => {
+   console.log("Server running on port 5000");
+});
+
+
+Request:
+
+POST http://localhost:5000/user/101?role=admin
+
+
+Body:
+
+{
+  "name": "Abishek"
+}
+
+
+Header:
+
+Authorization: Bearer 12345
+
+
+Output:
+
+Params: 101
+Query: admin
+Body: Abishek
+Headers: Bearer 12345

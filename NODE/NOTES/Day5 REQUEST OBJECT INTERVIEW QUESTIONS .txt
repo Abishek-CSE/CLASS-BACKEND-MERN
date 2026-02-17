@@ -1,0 +1,354 @@
+🔥 RESPONSE OBJECT – THEORY QUESTIONS
+1️⃣ What is Response Object in Express?
+
+The Response Object (res) represents the HTTP response that the Express server sends back to the client.
+
+It is used to:
+
+Send data to client
+
+Send JSON
+
+Send status codes
+
+Send headers
+
+End the request–response cycle
+
+Example:
+
+app.get("/", (req, res) => {
+  res.send("Hello Client");
+});
+
+
+Here, res.send() sends response to client.
+
+2️⃣ Different methods available in Response Object
+
+Common methods:
+
+Method	Description
+res.send()	Send response (string, object, html)
+res.json()	Send JSON response
+res.status()	Set HTTP status code
+res.sendFile()	Send file
+res.redirect()	Redirect to another route
+res.set()	Set header
+res.header()	Set header
+res.end()	End response
+res.download()	Download file
+
+Example:
+
+res.status(200).json({message: "Success"});
+
+3️⃣ How is res object made available? Do we import it?
+
+No ❌
+We DO NOT import it manually.
+
+Express automatically provides:
+
+(req, res)
+
+
+Example:
+
+app.get("/", (req, res) => {
+   res.send("Hello");
+});
+
+
+Express internally creates and passes the res object.
+
+4️⃣ What kind of data can be sent using response object?
+
+You can send:
+
+String
+
+JSON
+
+HTML
+
+File
+
+Object
+
+Buffer
+
+Examples:
+
+res.send("Hello");
+
+res.json({name: "Abishek"});
+
+res.sendFile("index.html");
+
+5️⃣ Use of status codes in HTTP responses
+
+Status codes tell client about result of request.
+
+Example:
+
+Code	Meaning
+200	Success
+201	Created
+400	Bad Request
+401	Unauthorized
+403	Forbidden
+404	Not Found
+500	Server Error
+
+Example:
+
+res.status(404).send("Not Found");
+
+6️⃣ What is a status code? Explain with examples
+
+Status code is a number sent by server to indicate request result.
+
+Examples:
+
+Success:
+
+res.status(200).send("OK");
+
+
+Created:
+
+res.status(201).send("User Created");
+
+
+Error:
+
+res.status(500).send("Server Error");
+
+
+Forbidden:
+
+res.status(403).send("Access Denied");
+
+🔥 PRACTICAL CODING TASKS
+
+Install express first:
+
+npm init -y
+npm install express
+
+✅ Complete Express Server (All Tasks Included)
+
+Create file: server.js
+
+const express = require("express");
+
+const app = express();
+
+app.use(express.json());
+
+/*
+7️⃣ API on port 5000 – Success Done
+*/
+app.get("/", (req, res) => {
+  res.send("Success Done");
+});
+
+
+/*
+8️⃣ API with status code 201
+*/
+app.get("/created", (req, res) => {
+  res.status(201).send("Resource Created Successfully");
+});
+
+
+/*
+9️⃣ GET route JSON data status 200
+*/
+app.get("/data", (req, res) => {
+  res.status(200).json({
+    name: "Abishek",
+    role: "Developer"
+  });
+});
+
+
+/*
+🔟 POST route read body and send back
+*/
+app.post("/echo", (req, res) => {
+
+  const data = req.body;
+
+  res.status(200).json({
+    receivedData: data
+  });
+
+});
+
+
+/*
+1️⃣1️⃣ Custom header route
+*/
+app.get("/custom-header", (req, res) => {
+
+  res.set("App-Name", "MyExpressApp");
+
+  res.status(200).send("Header Sent Successfully");
+
+});
+
+
+/*
+🧪 1 Basic Success Response Task
+*/
+app.get("/success", (req, res) => {
+
+  res.status(200).send("Operation Successful");
+
+});
+
+
+/*
+🧪 2 JSON Response Task
+*/
+app.get("/profile", (req, res) => {
+
+  res.status(200).json({
+
+    name: "Abishek",
+    role: "Full Stack Developer",
+    experience: "2 years"
+
+  });
+
+});
+
+
+/*
+🧪 3 Create user route
+*/
+app.post("/create-user", (req, res) => {
+
+  const user = req.body;
+
+  res.status(201).json({
+
+    message: "User Created Successfully",
+    user: user
+
+  });
+
+});
+
+
+/*
+🧪 4 Error handling route
+*/
+app.get("/error", (req, res) => {
+
+  res.status(500).json({
+
+    error: "Internal Server Error"
+
+  });
+
+});
+
+
+/*
+🧪 5 Custom Header Task
+*/
+app.get("/headers", (req, res) => {
+
+  res.set("App-Name", "MyExpressApp");
+
+  res.status(200).send("Header Sent Successfully");
+
+});
+
+
+/*
+🧪 6 Conditional Status Code Task
+*/
+app.get("/check", (req, res) => {
+
+  const role = req.query.role;
+
+  if(role === "admin")
+  {
+    res.status(200).send("Access Granted");
+  }
+  else
+  {
+    res.status(403).send("Access Denied");
+  }
+
+});
+
+
+/*
+Start server
+*/
+app.listen(5000, () => {
+
+  console.log("Server running on http://localhost:5000");
+
+});
+
+▶️ Run server
+node server.js
+
+
+Output:
+
+Server running on http://localhost:5000
+
+▶️ Test URLs in Browser or Postman
+http://localhost:5000/
+http://localhost:5000/success
+http://localhost:5000/profile
+http://localhost:5000/error
+http://localhost:5000/headers
+http://localhost:5000/check?role=admin
+http://localhost:5000/check?role=user
+
+✅ Example POST test (Postman)
+
+URL:
+
+POST http://localhost:5000/create-user
+
+
+Body:
+
+{
+  "name": "Abishek",
+  "role": "Developer"
+}
+
+
+Response:
+
+{
+  "message": "User Created Successfully",
+  "user": {
+    "name": "Abishek",
+    "role": "Developer"
+  }
+}
+
+✅ Summary
+
+Response object (res) is used to:
+
+Send response → res.send()
+
+Send JSON → res.json()
+
+Set status → res.status()
+
+Set header → res.set()
+
+Express automatically provides res.

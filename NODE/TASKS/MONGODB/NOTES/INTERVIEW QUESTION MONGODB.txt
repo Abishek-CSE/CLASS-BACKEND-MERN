@@ -1,0 +1,284 @@
+1. What is MongoDB? What is MongoDB Cluster?
+MongoDB
+
+MongoDB is a NoSQL database used to store data in JSON-like format called documents.
+
+It stores data in collections
+
+Each collection contains documents
+
+Documents are stored in BSON format (Binary JSON)
+
+Example Document:
+{
+  "name": "Abishek",
+  "age": 22,
+  "role": "Developer"
+}
+
+Why MongoDB is used?
+
+Flexible schema
+
+Fast performance
+
+Easy to use with Node.js
+
+Used in modern applications
+
+MongoDB Cluster
+
+A MongoDB Cluster is a group of MongoDB databases hosted in the cloud.
+
+Example: MongoDB Atlas Cluster
+
+Cluster contains:
+
+Database
+
+Collections
+
+Documents
+
+Cluster is used for:
+
+Cloud storage
+
+High availability
+
+Backup
+
+Security
+
+2. What are ORM methods?
+ORM = Object Relational Mapping
+
+ORM is used to connect SQL databases with programming languages.
+
+It converts:
+
+Database Table → Object
+Object → Database Table
+
+Example:
+
+SQL table → User
+Code → User object
+
+Example ORM tools:
+
+Sequelize
+
+TypeORM
+
+Prisma
+
+3. What is ODM? Why we use?
+ODM = Object Document Mapping
+
+ODM is used to connect MongoDB (NoSQL) with programming languages.
+
+It converts:
+
+MongoDB Document → JavaScript Object
+JavaScript Object → MongoDB Document
+
+Why we use ODM?
+
+Easy database operations
+
+Validation support
+
+Cleaner code
+
+Structure for data
+
+Example ODM:
+
+Mongoose
+
+4. What is Mongoose? Why we use?
+
+Mongoose is an ODM library for MongoDB and Node.js
+
+It helps to:
+
+Connect MongoDB with Node.js
+
+Create schema
+
+Create models
+
+Perform CRUD operations
+
+Why use Mongoose?
+
+Schema validation
+
+Easy CRUD operations
+
+Cleaner code
+
+Middleware support
+
+Example:
+
+const mongoose = require("mongoose");
+
+mongoose.connect("mongodb://127.0.0.1:27017/mydb");
+
+console.log("Database connected");
+
+5. What is DB?
+
+DB = Database
+
+Database is a place where data is stored and managed.
+
+Example:
+
+Student data
+
+User data
+
+Product data
+
+Example:
+
+Database: School
+Collection: Students
+Document:
+{
+ name: "Abishek",
+ age: 22
+}
+
+6. How to connect DB in Node.js and show connected message in CMD?
+
+Step 1: Install mongoose
+
+npm install mongoose
+
+
+Step 2: Connect database
+
+const mongoose = require("mongoose");
+
+mongoose.connect("mongodb://127.0.0.1:27017/mydb")
+.then(() => {
+    console.log("Database Connected Successfully");
+})
+.catch((error) => {
+    console.log("Database Connection Failed", error);
+});
+
+
+Step 3: Run file
+
+node app.js
+
+
+Output in CMD:
+
+Database Connected Successfully
+
+7. Difference between SQL and NoSQL
+SQL	NoSQL
+Structured	Unstructured
+Uses tables	Uses collections
+Uses rows	Uses documents
+Fixed schema	Flexible schema
+Example: MySQL	Example: MongoDB
+Uses SQL query	Uses JSON format
+
+Example SQL:
+
+Table: Users
+Columns: id, name, age
+
+
+Example NoSQL:
+
+{
+ name: "Abishek",
+ age: 22
+}
+
+8. What is Collections?
+
+Collection is a group of documents
+
+Collection is like a table in SQL
+
+Example:
+Collection name: users
+
+Inside users collection:
+
+{
+ name: "Abishek"
+}
+{
+ name: "John"
+}
+
+9. What is Document in MongoDB?
+
+Document is a single record in MongoDB
+
+Document is stored in JSON format
+
+Example:
+
+{
+ name: "Abishek",
+ age: 22,
+ role: "Developer"
+}
+
+
+Collection → users
+Document → one user data
+
+10. What is Compass? Why we use?
+MongoDB Compass
+
+MongoDB Compass is a GUI tool for MongoDB
+
+It helps to:
+
+View database
+
+Create database
+
+Insert data
+
+Delete data
+
+Edit data
+
+No coding required
+
+Why use Compass?
+
+Easy to manage database
+
+Visual interface
+
+Beginner friendly
+
+Example:
+You can see:
+
+Database
+
+Collection
+
+Documents
+
+Simple Real Life Example Summary
+MongoDB	Real life example
+Database	School
+Collection	Students
+Document	One student
+Field	name, age

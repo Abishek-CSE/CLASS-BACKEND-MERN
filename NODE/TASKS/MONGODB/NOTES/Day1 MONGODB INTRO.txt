@@ -1,0 +1,17 @@
+BSON
+
+BSON stands for Binary JavaScript Object Notation. It is a binary-encoded serialization format used primarily by MongoDB to store documents and make remote procedure calls, offering faster parsing, efficient storage, and extended data types (such as Date and BinData) compared to standard JSON.
+
+JSON
+
+
+MongoDb -  _id mongoose
+
+npm i mongoose
+
+
+
+
+Mongodb -
+online  - https://www.mongodb.com/ - cloud
+offline - compass - GUI

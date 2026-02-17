@@ -1,0 +1,10 @@
+USERNAME : abisheknavas000_db_user
+
+PASSWORD : dZePH4VOrmEHQofH
+
+
+mongodb+srv://abisheknavas000_db_user:dZePH4VOrmEHQofH@cluster0.ng8bphw.mongodb.net/?appName=Cluster0
+
+
+
+DRIVER LINK : mongodb+srv://abisheknavas000_db_user:<db_password>@cluster0.ng8bphw.mongodb.net/?appName=Cluster0

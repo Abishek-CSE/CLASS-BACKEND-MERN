@@ -1,0 +1,47 @@
+Db connection
+
+ORM Methods
+
+create()
+find()
+findByID()
+findByIdAndUpdate()
+findByIdAndDelete()
+
+
+DB -> DB
+
+Table -> Collection
+
+Row -> Document
+
+column -> Field
+
+Primary key -> _id
+
+INSERT  ->  create()
+
+SELECT  -> find()
+
+UPDATE  -> findByIDAndUpdate()
+
+Select id -> findById()
+
+Delete -> findByIdAndDelete()
+
+
+
+Schema
+A blue Print of collection of you mongodb
+
+Scheme properties
+
+{
+fieldname:{type:String,required:true,unique:ture,default: 1,enum:["admin","manager"]}
+},timestamps:true
+
+
+
+
+Modle
+

@@ -1,0 +1,440 @@
+1️⃣ DB Connection Process (Step-by-Step)
+Step 1: How MongoDB connects locally
+
+When MongoDB is installed locally, it runs on:
+
+mongodb://127.0.0.1:27017/databaseName
+
+
+Example:
+
+mongodb://127.0.0.1:27017/mydb
+
+
+Explanation:
+
+Part	Meaning
+mongodb://	Protocol
+127.0.0.1	Localhost
+27017	Default MongoDB port
+mydb	Database name
+
+MongoDB automatically creates the database if it doesn't exist.
+
+Step 2: What mongoose.connect() does
+mongoose.connect("mongodb://127.0.0.1:27017/mydb")
+
+
+This function:
+
+• Connects Node.js to MongoDB
+• Creates connection session
+• Allows CRUD operations
+• Manages connection pooling
+
+Internally it:
+
+Opens TCP connection
+
+Authenticates (if needed)
+
+Selects database
+
+Keeps connection alive
+
+Step 3: Why we use async/await with try-catch
+
+Database connection takes time → asynchronous operation.
+
+Example:
+
+import mongoose from "mongoose";
+
+const connectDB = async () => {
+  try {
+    await mongoose.connect("mongodb://127.0.0.1:27017/mydb");
+
+    console.log("Database Connected Successfully");
+  } catch (error) {
+    console.log("Database Connection Failed", error);
+  }
+};
+
+connectDB();
+
+
+Why async/await?
+
+• Wait until DB connects
+• Prevent server crash
+• Handle errors safely
+
+Step 4: What happens if DB connection fails
+
+If connection fails:
+
+Example reasons:
+
+• MongoDB not started
+• Wrong URL
+• Network error
+
+Error example:
+
+MongooseServerSelectionError: connect ECONNREFUSED
+
+
+Without try-catch → App crashes ❌
+With try-catch → Error handled safely ✅
+
+2️⃣ ORM / ODM Methods Understanding
+
+Mongoose provides methods to interact with MongoDB.
+
+These are similar to SQL operations.
+
+1. create()
+
+Purpose: Insert new document
+
+Example:
+
+User.create({
+  name: "Abishek",
+  age: 22
+});
+
+
+SQL Equivalent:
+
+INSERT INTO users (name, age) VALUES ("Abishek", 22);
+
+
+Real-time use:
+
+• Register user
+• Create product
+• Save order
+
+2. find()
+
+Purpose: Get all documents
+
+Example:
+
+User.find();
+
+
+SQL Equivalent:
+
+SELECT * FROM users;
+
+
+Use case:
+
+• Show all users
+• List products
+
+3. findById()
+
+Purpose: Get single document by ID
+
+Example:
+
+User.findById("65abc123");
+
+
+SQL Equivalent:
+
+SELECT * FROM users WHERE id = 65abc123;
+
+
+Use case:
+
+• View profile
+• View single product
+
+4. findByIdAndUpdate()
+
+Purpose: Update document
+
+Example:
+
+User.findByIdAndUpdate(id, { age: 25 });
+
+
+SQL Equivalent:
+
+UPDATE users SET age = 25 WHERE id = id;
+
+
+Use case:
+
+• Update profile
+• Update product price
+
+5. findByIdAndDelete()
+
+Purpose: Delete document
+
+Example:
+
+User.findByIdAndDelete(id);
+
+
+SQL Equivalent:
+
+DELETE FROM users WHERE id = id;
+
+
+Use case:
+
+• Delete account
+• Delete product
+
+3️⃣ SQL vs MongoDB Mapping Table
+SQL	MongoDB
+Database	Database
+Table	Collection
+Row	Document
+Column	Field
+Primary Key	_id
+
+Example:
+
+SQL:
+
+Database → company
+Table → employees
+Row → employee record
+
+
+MongoDB:
+
+Database → company
+Collection → employees
+Document → employee record
+
+4️⃣ Schema Reading Task
+
+Schema:
+
+{
+  name: { type: String, required: true },
+  role: { type: String, enum: ["admin", "manager"] },
+  age: { type: Number, default: 18 }
+}
+
+Validation 1: name
+required: true
+
+
+Meaning:
+
+• name must be provided
+• Cannot be empty
+
+Example error:
+
+ValidationError: name is required
+
+Validation 2: role
+enum: ["admin", "manager"]
+
+
+Allowed values:
+
+• admin
+• manager
+
+What happens if role = "user"?
+
+Error:
+
+ValidationError: role is invalid
+
+
+Because "user" not allowed.
+
+Validation 3: age
+default: 18
+
+
+Meaning:
+
+If age not provided → automatically set to 18
+
+Example:
+
+Input:
+
+{ name: "Abishek", role: "admin" }
+
+
+Saved as:
+
+{ name: "Abishek", role: "admin", age: 18 }
+
+5️⃣ Schema vs Model
+Schema
+
+Schema defines structure.
+
+Example:
+
+const userSchema = new mongoose.Schema({
+  name: String,
+  age: Number
+});
+
+
+Defines:
+
+• Fields
+• Data types
+• Validation
+
+Schema = Blueprint
+
+Model
+
+Model interacts with database.
+
+Example:
+
+const User = mongoose.model("User", userSchema);
+
+
+Model allows:
+
+User.create()
+User.find()
+User.update()
+User.delete()
+
+Why we need model?
+
+Schema only defines structure.
+
+Model performs database operations.
+
+Schema ❌ Cannot save data
+Model ✅ Can save data
+
+What happens internally when mongoose.model() runs?
+
+It:
+
+Creates collection (users)
+
+Links schema to collection
+
+Creates CRUD functions
+
+Returns model object
+
+6️⃣ Practical Task – Create User API (POST)
+
+Project structure:
+
+project/
+│
+├── server.js
+├── models/
+│   └── userModel.js
+
+userModel.js
+import mongoose from "mongoose";
+
+const userSchema = new mongoose.Schema({
+  name: String,
+  age: Number
+});
+
+const User = mongoose.model("User", userSchema);
+
+export default User;
+
+server.js
+import express from "express";
+import mongoose from "mongoose";
+import User from "./models/userModel.js";
+
+const app = express();
+
+app.use(express.json());
+
+mongoose.connect("mongodb://127.0.0.1:27017/mydb")
+.then(()=> console.log("DB Connected"))
+.catch(()=> console.log("DB Failed"));
+
+
+// POST API
+app.post("/api/users", async (req, res) => {
+
+  try {
+
+    const user = await User.create(req.body);
+
+    res.status(201).json({
+      message: "User Created Successfully",
+      data: user
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      message: "Error creating user"
+    });
+
+  }
+
+});
+
+
+app.listen(5000, () => {
+  console.log("Server running on port 5000");
+});
+
+7️⃣ Practical Task – Get All Users API (GET)
+
+Add this route in server.js
+
+app.get("/api/users", async (req, res) => {
+
+  try {
+
+    const users = await User.find();
+
+    res.status(200).json({
+      message: "Users fetched successfully",
+      data: users
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      message: "Error fetching users"
+    });
+
+  }
+
+});
+
+Final Summary
+
+DB Connection Flow:
+
+Node.js
+  ↓
+Mongoose.connect()
+  ↓
+MongoDB Connection
+  ↓
+Schema
+  ↓
+Model
+  ↓
+CRUD Operations
+  ↓
+API Respon

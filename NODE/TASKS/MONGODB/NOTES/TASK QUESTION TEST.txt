@@ -1,0 +1,385 @@
+1️⃣ What is Node.js and why is it used in backend development?
+Definition
+
+Node.js is a JavaScript runtime environment that allows you to run JavaScript outside the browser.
+
+It is built on Chrome's V8 engine.
+
+Why it is used in backend
+
+Before Node.js:
+
+JavaScript was only used in frontend
+
+After Node.js:
+
+JavaScript can run on server
+
+We can build backend using JavaScript
+
+Uses
+
+Node.js is used for:
+
+Creating servers
+
+Building APIs
+
+Handling database
+
+File operations
+
+Real-time apps (chat apps)
+
+Example
+console.log("Hello from Node.js");
+2️⃣ Difference between Synchronous and Asynchronous functions
+Synchronous (Blocking)
+
+Executes line by line. Next line waits until previous finishes.
+
+Example:
+
+console.log("Start");
+console.log("Middle");
+console.log("End");
+
+Output:
+
+Start
+Middle
+End
+Asynchronous (Non-blocking)
+
+Does not wait. Runs in background.
+
+Example:
+
+console.log("Start");
+
+setTimeout(()=>{
+  console.log("Middle");
+},2000);
+
+console.log("End");
+
+Output:
+
+Start
+End
+Middle
+
+Why important?
+
+Prevents server blocking
+
+Handles multiple users efficiently
+
+3️⃣ What is fs module? Name two methods.
+Definition
+
+fs = File System module
+
+Used to:
+
+Create files
+
+Read files
+
+Update files
+
+Delete files
+
+Import
+const fs = require("fs");
+Two methods
+1. readFile()
+
+Reads file asynchronously
+
+fs.readFile("file.txt","utf-8",(err,data)=>{
+ console.log(data);
+});
+2. writeFile()
+
+Creates or writes file
+
+fs.writeFile("file.txt","Hello",(err)=>{
+ console.log("File created");
+});
+
+Other methods:
+
+appendFile()
+
+unlink()
+
+rename()
+
+4️⃣ Difference between Relative path and Absolute path
+Relative path
+
+Path from current folder
+
+Example:
+
+"./file.txt"
+"../file.txt"
+Absolute path
+
+Full path from root
+
+Example:
+
+C:/Users/Abi/Desktop/file.txt
+
+Linux example:
+
+/home/user/file.txt
+5️⃣ What is Express and how is it different from Node HTTP module?
+Definition
+
+Express.js is a web framework for Node.js used to build APIs and servers easily.
+
+Node HTTP module example (complex)
+const http = require("http");
+
+http.createServer((req,res)=>{
+ res.end("Hello");
+}).listen(3000);
+Express example (simple)
+const express = require("express");
+const app = express();
+
+app.get("/",(req,res)=>{
+ res.send("Hello");
+});
+
+app.listen(3000);
+Difference
+Node HTTP	Express
+Basic module	Framework
+Hard to write	Easy
+No routing support	Built-in routing
+No middleware	Supports middleware
+6️⃣ What is routing in Express? How do you create route?
+Definition
+
+Routing means defining URL endpoints.
+
+Example URL:
+
+/users
+/products
+/login
+Example
+app.get("/users",(req,res)=>{
+ res.send("Users route");
+});
+
+Structure:
+
+app.METHOD(PATH, HANDLER)
+
+Methods:
+
+get()
+
+post()
+
+put()
+
+delete()
+
+7️⃣ Difference between req.params, req.query, req.body
+req.params
+
+Used for URL parameters
+
+Example:
+
+app.get("/user/:id",(req,res)=>{
+ console.log(req.params.id);
+});
+
+URL:
+
+/user/101
+
+Output:
+
+101
+req.query
+
+Used for query string
+
+URL:
+
+/user?id=101
+
+Code:
+
+req.query.id
+req.body
+
+Used for POST data
+
+Example:
+
+req.body.name
+
+Needs middleware:
+
+app.use(express.json());
+8️⃣ What is response object (res)? Why important?
+Definition
+
+res is response object used to send data from server to client.
+
+Example
+res.send("Hello");
+res.json({name:"Abi"});
+res.status(200).send("Success");
+Why important
+
+Without res, client will never get response.
+
+9️⃣ Use of HTTP status codes. Name three commonly used
+Definition
+
+Status codes tell client request result.
+
+Examples
+Code	Meaning
+200	Success
+404	Not found
+500	Server error
+
+Example:
+
+res.status(200).send("Success");
+
+Other codes:
+
+201 Created
+
+400 Bad request
+
+401 Unauthorized
+
+🔟 What is MVC architecture? Why use it?
+MVC = Model View Controller
+
+Structure:
+
+Model → Database logic
+View → UI
+Controller → Business logic
+
+Example:
+
+Controller:
+
+UserController.js
+
+Model:
+
+UserModel.js
+
+Route:
+
+UserRoute.js
+Why use MVC
+
+Benefits:
+
+Clean structure
+
+Easy maintenance
+
+Easy debugging
+
+Scalable project
+
+1️⃣1️⃣ What is MongoDB? How different from SQL?
+Definition
+
+MongoDB is a NoSQL database that stores data in JSON-like format.
+
+SQL vs MongoDB
+SQL	MongoDB
+Table	Collection
+Row	Document
+Fixed schema	Flexible schema
+MySQL	MongoDB
+
+Example MongoDB document:
+
+{
+ name:"Abi",
+ age:22
+}
+1️⃣2️⃣ What is Mongoose and why use it?
+Definition
+
+Mongoose is an ODM (Object Data Modeling) library for MongoDB and Node.js.
+
+Why use
+
+Schema creation
+
+Validation
+
+Easy database operations
+
+Cleaner code
+
+1️⃣3️⃣ What is Schema in Mongoose?
+
+Schema defines structure of document.
+
+Example:
+
+const mongoose = require("mongoose");
+
+const userSchema = new mongoose.Schema({
+ name:String,
+ age:Number
+});
+
+Schema defines:
+
+Fields
+
+Data types
+
+Validation
+
+1️⃣4️⃣ What is Model in Mongoose?
+
+Model is used to interact with database.
+
+Created from schema.
+
+Example:
+
+const User = mongoose.model("User", userSchema);
+
+Model represents collection.
+
+1️⃣5️⃣ Mongoose CRUD methods
+Create
+User.create({name:"Abi"});
+Read
+User.find();
+User.findById(id);
+Update
+User.findByIdAndUpdate(id,{name:"New"});
+Delete
+User.findByIdAndDelete(id);
+Summary Table
+Operation	Method
+Create	create()
+Read	find(), findById()
+Update	findByIdAndUpdate()
+Delete	findByIdAndDelete()

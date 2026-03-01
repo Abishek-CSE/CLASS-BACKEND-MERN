@@ -1,0 +1,47 @@
+🔥 WHAT IS JWT? (4 Detailed Paras)
+JWT stands for JSON Web Token. It is a compact, self-contained, and secure way to transmit information between two parties as a JSON object. The information inside the token is digitally signed, which means it cannot be modified without invalidating the signature. JWT is widely used in authentication systems to maintain user sessions securely in modern web applications.
+
+A JWT token consists of three parts separated by dots: Header, Payload, and Signature. The Header contains information about the signing algorithm. The Payload contains user-related data like user ID or role. The Signature ensures that the token has not been tampered with. This structure makes JWT both secure and lightweight.
+
+JWT is stateless, meaning the server does not need to store session data in memory or database. Once a token is generated and sent to the client, the client sends it back with every request. The server verifies the token each time. This makes JWT highly scalable and suitable for distributed systems and microservices.
+
+JWT is commonly used in REST APIs where frontend and backend are separate. Instead of storing sessions on the server, JWT tokens carry the authentication information. This improves performance and scalability in production applications.
+
+Interview line:
+
+JWT is a stateless authentication mechanism that securely transmits user information using a digitally signed token.
+
+
+🔥 WHEN DO WE USE JWT?
+We use JWT when building APIs that require user authentication. Especially in MERN stack applications, mobile apps, and microservices architecture, JWT helps maintain user login state without storing session data on the server.
+
+JWT is ideal when:
+
+Frontend and backend are separate
+
+We need stateless authentication
+
+We want scalable API architecture
+
+We need role-based access control
+
+JWT is not ideal when:
+
+Highly sensitive systems require server-side session invalidation
+
+Token revocation needs to be immediate
+
+
+🔥 AUTHENTICATION vs AUTHORIZATION (3 Long Paras)
+Authentication is the process of verifying who the user is. It answers the question: “Are you really who you claim to be?” For example, when a user logs in with email and password, the system verifies credentials and confirms identity. If credentials are valid, authentication succeeds.
+
+Authorization happens after authentication. It determines what the authenticated user is allowed to do. For example, a logged-in user may access dashboard, but only an admin can delete users. Authorization checks permissions and roles before granting access.
+
+In simple terms:
+Authentication = Identity verification
+Authorization = Access control
+In JWT systems, authentication occurs when token is generated. Authorization occurs when token is verified and user roles are checked.
+
+Interview line:
+
+Authentication verifies identity, authorization verifies permissions.
